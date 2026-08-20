@@ -7,11 +7,13 @@
 ## 全球国家-年份面板研究
 
 ### 作者
-Qingqing Mo¹²、Pingbo Chen¹²、Cheng Xu¹²、Ya Wang¹²、Ting Hu¹²、Qian Sun¹²、Tao Zhu¹²✉
+墨青青¹²、陈平波¹²、徐成¹²、王亚¹²、胡婷¹²、孙茜¹²、朱涛¹²✉
 
 ¹ 华中科技大学同济医学院附属同济医院妇产科，国家妇产疾病临床医学研究中心，武汉
 ² 教育部肿瘤侵袭转移重点实验室，华中科技大学同济医学院附属同济医院，武汉
-✉ zhutao@tjh.tjmu.edu.cn
+
+通讯作者：朱涛，zhutao@tjh.tjmu.edu.cn
+邮箱：墨青青 qingqingmo520@tjh.tjmu.edu.cn；陈平波 supercpb520@163.com；徐成 watt15629030676@tjh.tjmu.edu.cn；王亚 misswangya@hotmail.com；胡婷 huting_tj@163.com；孙茜 sunqian@tjh.tjmu.edu.cn
 
 ---
 
