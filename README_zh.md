@@ -1,6 +1,6 @@
 # 政府卫生支出、自付医疗支出与健康预期寿命：190个国家2000–2022年面板分析
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22028177.svg)](https://doi.org/10.5281/zenodo.22028177)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22028177-003399.svg)](https://doi.org/10.5281/zenodo.22028177)
 
 ## 全球国家-年份面板研究
 
