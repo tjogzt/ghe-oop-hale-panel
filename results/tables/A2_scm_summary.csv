@@ -1,0 +1,3 @@
+country,reform,reform_year,income_group,pre_rmspe,post_att,n_donors,n_placebos,placebo_pvalue
+Rwanda,CBHI,2005,Low income,,,25,8,
+Ghana,NHIS,2003,Low income,,,26,8,

@@ -1,0 +1,8 @@
+metric,value
+n_austerity_countries,21
+n_austerity_events,21
+n_spike_countries,25
+n_overlap,10
+austerity_did_coef,-0.882042836392737
+austerity_did_se,0.322251043081649
+austerity_did_p,0.00677084077374802

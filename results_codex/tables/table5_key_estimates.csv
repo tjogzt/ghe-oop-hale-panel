@@ -1,0 +1,27 @@
+"model","term","estimate","std_error","p_value","ci_lower","ci_upper","n_obs"
+"OLS_1_raw","ghe_share_gdp",1.473,0.07001,1.318e-93,1.336,1.61,4314
+"OLS_2_gdp","ghe_share_gdp",0.1641,0.0443,0.000214,0.0773,0.2509,4314
+"OLS_3_full_controls","ghe_share_gdp",-0.01141,0.03322,0.7312,-0.07653,0.0537,4304
+"TWFE_1_baseline","ghe_share_gdp",-0.2062,0.07958,0.01033,-0.3622,-0.05018,4314
+"TWFE_2_gdp","ghe_share_gdp",-0.1873,0.07718,0.01616,-0.3386,-0.03604,4314
+"TWFE_3_full_controls","ghe_share_gdp",-0.1216,0.06835,0.07693,-0.2555,0.0124,4304
+"TWFE_4_quadratic","ghe_share_gdp",-0.1695,0.1433,0.2383,-0.4504,0.1113,4304
+"IV_2SLS_tax_revenue","fit_ghe_share_gdp",9.423,114.5,0.9345,-215,233.8,2753
+"TWFE_5_lags","ghe_share_gdp",-0.1221,0.05226,0.02053,-0.2245,-0.01967,3926
+"LongDiff_2000_latest","d_ghe",-0.3304,0.1339,0.01454,-0.5928,-0.06791,186
+"TWFE_7_income_interactions","ghe_share_gdp:income_baseLow income",0.9756,0.5519,0.0787,-0.106,2.057,4304
+"TWFE_7_income_interactions","ghe_share_gdp:income_baseLower middle income",-0.08851,0.2077,0.6706,-0.4957,0.3187,4304
+"TWFE_7_income_interactions","ghe_share_gdp:income_baseUpper middle income",-0.3469,0.1273,0.007061,-0.5965,-0.09727,4304
+"TWFE_7_income_interactions","ghe_share_gdp:income_baseHigh income",-0.03928,0.0698,0.5743,-0.1761,0.09752,4304
+"SystemGMM_twostep","ghe_share_gdp",-0.03294,0.08064,0.6829,-0.191,0.1251,4304
+"LongDiff_OLS","d_ghe",-0.4036,0.1814,0.02756,-0.7591,-0.04815,151
+"LongDiff_2SLS_tax0","fit_d_ghe",-0.7677,0.6919,0.269,-2.124,0.5885,151
+"R1a_log_ghe_pc","log_ghe_pc",-0.1555,0.2325,0.5045,-0.6113,0.3003,4304
+"R2_no_covid","ghe_share_gdp",-0.07673,0.06932,0.2698,-0.2126,0.05914,3743
+"R3_no_outliers","ghe_share_gdp",-0.119,0.05699,0.03811,-0.2307,-0.007314,4239
+"R4_winsorized","ghe_w",-0.1479,0.08716,0.09139,-0.3187,0.02294,4304
+"R5_balanced","ghe_share_gdp",-0.1157,0.06837,0.09216,-0.2497,0.01826,4267
+"R6_no_small","ghe_share_gdp",-0.3285,0.1121,0.003897,-0.5481,-0.1089,3444
+"R7_governance","ghe_share_gdp",-0.161,0.06596,0.01558,-0.2903,-0.03172,4098
+"R8a_period_2000_2011","ghe_share_gdp",-0.01375,0.05652,0.8081,-0.1245,0.09703,2238
+"R8b_period_2012_2022","ghe_share_gdp",-0.09582,0.04093,0.0203,-0.176,-0.01559,2065

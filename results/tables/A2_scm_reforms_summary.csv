@@ -1,0 +1,7 @@
+Country,ISO,ReformYear,Income,N_pre_years,N_donors,PreRMSPE,PostATT,MSPE_ratio,Placebo_p,N_placebo
+Rwanda (CBHI),RWA,2005,Low income,5,20,1.45,2.108,2.16,0.762,20
+China (Health Reform),CHN,2009,Upper middle income,9,45,0.507,2.896,39.51,0.152,45
+Thailand (UCS),THA,2002,Upper middle income,2,47,0.002,1.501,982534.34,0.021,47
+Turkey (HTP),TUR,2003,Upper middle income,3,47,0.29,1.134,17.87,0.646,47
+Ghana (NHIS),GHA,2003,Lower middle income,3,48,0.011,0.073,703.49,0.061,48
+Mexico (Seguro Popular),MEX,2004,Upper middle income,4,47,0.027,-0.657,798.31,0.021,47

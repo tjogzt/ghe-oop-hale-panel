@@ -1,0 +1,10 @@
+Specification,Coordinator,Claude,Codex,Convergent
+Pooled OLS (full controls),-0.011 (p=0.731),-0.056 (p=0.054),-0.011 (p=0.731),✅ Yes
+TWFE (primary),-0.122 (p=0.077),-0.101 (p=0.009),-0.122 (p=0.077),"✅ Yes (all negative, similar magnitude)"
+TWFE + governance,-0.161 (p=0.016),—,—,—
+Long-difference,-0.330 (p=0.034),—,-0.330 (p=0.015),✅ Yes (all negative)
+5-year TWFE,-0.204 (p=0.034),—,—,—
+Low-income TWFE,0.846 (p=0.030),0.532 (p=0.156),—,"✅ Yes (all positive, only positive subgroup)"
+Lower-middle-income TWFE,-0.073 (p=0.735),-0.036 (p=0.865),—,✅ Yes (all near zero)
+Upper-middle-income TWFE,-0.164 (p=0.077),-0.169 (p=0.058),—,✅ Yes (all negative)
+High-income TWFE,0.007 (p=0.882),0.032 (p=0.305),—,✅ Yes (all near zero)

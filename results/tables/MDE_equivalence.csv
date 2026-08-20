@@ -1,0 +1,15 @@
+Metric,Value
+TWFE beta,-0.121563755680868
+SE,0.0683489221648362
+95% CI lower,-0.255527643123947
+95% CI upper,0.0124001317622108
+MDE (80% power),0.191376982061541
+Equiv test: β<0.2 (p),0.00000131087342119156
+Equiv test: β<0.1 (p),0.000598717860235975
+% cross-sectional ruled out,99.1564536216183
+LOO beta range (min),-0.146179966901582
+LOO beta range (max),-0.104867505544085
+Low-income full β,0.845517993079644
+Low-income LOO beta range min,0.663015643223469
+Low-income LOO beta range max,1.01568025309577
+Low-income n clusters,24

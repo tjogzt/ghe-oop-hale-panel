@@ -1,0 +1,23 @@
+# LaTeX intermediates
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# R
+.Rhistory
+.RData
+.Rproj.user
+
+# Large raw data (re-downloadable from public APIs)
+data/raw/*.csv
+data/raw/*.rds

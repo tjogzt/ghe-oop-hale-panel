@@ -1,0 +1,191 @@
+iso3c,country,income,n_years,first_year,last_year,span
+AFG,Afghanistan,Low income,21,2002,2022,21
+ALB,Albania,Upper middle income,23,2000,2022,23
+DZA,Algeria,Upper middle income,23,2000,2022,23
+AND,Andorra,High income,23,2000,2022,23
+AGO,Angola,Lower middle income,23,2000,2022,23
+ATG,Antigua and Barbuda,High income,23,2000,2022,23
+ARG,Argentina,Upper middle income,23,2000,2022,23
+ARM,Armenia,Upper middle income,23,2000,2022,23
+AUS,Australia,High income,23,2000,2022,23
+AUT,Austria,High income,23,2000,2022,23
+AZE,Azerbaijan,Upper middle income,23,2000,2022,23
+BHS,"Bahamas, The",High income,23,2000,2022,23
+BHR,Bahrain,High income,23,2000,2022,23
+BGD,Bangladesh,Lower middle income,23,2000,2022,23
+BRB,Barbados,High income,23,2000,2022,23
+BLR,Belarus,Upper middle income,23,2000,2022,23
+BEL,Belgium,High income,23,2000,2022,23
+BLZ,Belize,Upper middle income,23,2000,2022,23
+BEN,Benin,Lower middle income,23,2000,2022,23
+BTN,Bhutan,Lower middle income,23,2000,2022,23
+BOL,Bolivia,Lower middle income,23,2000,2022,23
+BIH,Bosnia and Herzegovina,Upper middle income,23,2000,2022,23
+BWA,Botswana,Upper middle income,23,2000,2022,23
+BRA,Brazil,Upper middle income,23,2000,2022,23
+BRN,Brunei Darussalam,High income,23,2000,2022,23
+BGR,Bulgaria,High income,23,2000,2022,23
+BFA,Burkina Faso,Low income,23,2000,2022,23
+BDI,Burundi,Low income,23,2000,2022,23
+CPV,Cabo Verde,Lower middle income,23,2000,2022,23
+KHM,Cambodia,Lower middle income,23,2000,2022,23
+CMR,Cameroon,Lower middle income,23,2000,2022,23
+CAN,Canada,High income,23,2000,2022,23
+CAF,Central African Republic,Low income,23,2000,2022,23
+TCD,Chad,Low income,23,2000,2022,23
+CHL,Chile,High income,23,2000,2022,23
+CHN,China,Upper middle income,23,2000,2022,23
+COL,Colombia,Upper middle income,23,2000,2022,23
+COM,Comoros,Lower middle income,23,2000,2022,23
+COD,"Congo, Dem. Rep.",Low income,23,2000,2022,23
+COG,"Congo, Rep.",Lower middle income,23,2000,2022,23
+CRI,Costa Rica,Upper middle income,23,2000,2022,23
+CIV,Cote d'Ivoire,Lower middle income,23,2000,2022,23
+HRV,Croatia,High income,23,2000,2022,23
+CUB,Cuba,Upper middle income,21,2000,2020,21
+CYP,Cyprus,High income,23,2000,2022,23
+CZE,Czechia,High income,23,2000,2022,23
+DNK,Denmark,High income,23,2000,2022,23
+DJI,Djibouti,Lower middle income,23,2000,2022,23
+DMA,Dominica,Upper middle income,23,2000,2022,23
+DOM,Dominican Republic,Upper middle income,23,2000,2022,23
+ECU,Ecuador,Upper middle income,23,2000,2022,23
+EGY,"Egypt, Arab Rep.",Lower middle income,23,2000,2022,23
+SLV,El Salvador,Upper middle income,23,2000,2022,23
+GNQ,Equatorial Guinea,Upper middle income,23,2000,2022,23
+ERI,Eritrea,Low income,12,2000,2011,12
+EST,Estonia,High income,23,2000,2022,23
+SWZ,Eswatini,Lower middle income,23,2000,2022,23
+ETH,Ethiopia,Low income,23,2000,2022,23
+FJI,Fiji,Upper middle income,23,2000,2022,23
+FIN,Finland,High income,23,2000,2022,23
+FRA,France,High income,23,2000,2022,23
+GAB,Gabon,Upper middle income,23,2000,2022,23
+GMB,"Gambia, The",Low income,23,2000,2022,23
+GEO,Georgia,Upper middle income,23,2000,2022,23
+DEU,Germany,High income,23,2000,2022,23
+GHA,Ghana,Lower middle income,23,2000,2022,23
+GRC,Greece,High income,23,2000,2022,23
+GRD,Grenada,Upper middle income,23,2000,2022,23
+GTM,Guatemala,Upper middle income,23,2000,2022,23
+GIN,Guinea,Lower middle income,23,2000,2022,23
+GNB,Guinea-Bissau,Low income,23,2000,2022,23
+GUY,Guyana,High income,23,2000,2022,23
+HTI,Haiti,Lower middle income,23,2000,2022,23
+HND,Honduras,Lower middle income,23,2000,2022,23
+HUN,Hungary,High income,23,2000,2022,23
+ISL,Iceland,High income,23,2000,2022,23
+IND,India,Lower middle income,23,2000,2022,23
+IDN,Indonesia,Upper middle income,23,2000,2022,23
+IRN,"Iran, Islamic Rep.",Upper middle income,23,2000,2022,23
+IRQ,Iraq,Upper middle income,20,2003,2022,20
+IRL,Ireland,High income,23,2000,2022,23
+ISR,Israel,High income,23,2000,2022,23
+ITA,Italy,High income,23,2000,2022,23
+JAM,Jamaica,Upper middle income,23,2000,2022,23
+JPN,Japan,High income,23,2000,2022,23
+JOR,Jordan,Lower middle income,23,2000,2022,23
+KAZ,Kazakhstan,Upper middle income,23,2000,2022,23
+KEN,Kenya,Lower middle income,23,2000,2022,23
+KIR,Kiribati,Lower middle income,23,2000,2022,23
+KOR,"Korea, Rep.",High income,23,2000,2022,23
+KWT,Kuwait,High income,23,2000,2022,23
+KGZ,Kyrgyz Republic,Lower middle income,23,2000,2022,23
+LAO,Lao PDR,Lower middle income,23,2000,2022,23
+LVA,Latvia,High income,23,2000,2022,23
+LBN,Lebanon,Lower middle income,23,2000,2022,23
+LSO,Lesotho,Lower middle income,23,2000,2022,23
+LBR,Liberia,Low income,23,2000,2022,23
+LBY,Libya,Upper middle income,23,2000,2022,23
+LTU,Lithuania,High income,23,2000,2022,23
+LUX,Luxembourg,High income,23,2000,2022,23
+MDG,Madagascar,Low income,23,2000,2022,23
+MWI,Malawi,Low income,23,2000,2022,23
+MYS,Malaysia,Upper middle income,23,2000,2022,23
+MDV,Maldives,Upper middle income,23,2000,2022,23
+MLI,Mali,Low income,23,2000,2022,23
+MLT,Malta,High income,23,2000,2022,23
+MHL,Marshall Islands,Upper middle income,23,2000,2022,23
+MRT,Mauritania,Lower middle income,23,2000,2022,23
+MUS,Mauritius,Upper middle income,23,2000,2022,23
+MEX,Mexico,Upper middle income,23,2000,2022,23
+FSM,"Micronesia, Fed. Sts.",Lower middle income,23,2000,2022,23
+MDA,Moldova,Upper middle income,23,2000,2022,23
+MCO,Monaco,High income,23,2000,2022,23
+MNG,Mongolia,Upper middle income,23,2000,2022,23
+MNE,Montenegro,Upper middle income,12,2011,2022,12
+MAR,Morocco,Lower middle income,23,2000,2022,23
+MOZ,Mozambique,Low income,23,2000,2022,23
+MMR,Myanmar,Lower middle income,23,2000,2022,23
+NAM,Namibia,Upper middle income,23,2000,2022,23
+NRU,Nauru,High income,23,2000,2022,23
+NPL,Nepal,Lower middle income,23,2000,2022,23
+NLD,Netherlands,High income,23,2000,2022,23
+NZL,New Zealand,High income,23,2000,2022,23
+NIC,Nicaragua,Lower middle income,23,2000,2022,23
+NER,Niger,Low income,23,2000,2022,23
+NGA,Nigeria,Lower middle income,23,2000,2022,23
+MKD,North Macedonia,Upper middle income,23,2000,2022,23
+NOR,Norway,High income,23,2000,2022,23
+OMN,Oman,High income,23,2000,2022,23
+PAK,Pakistan,Lower middle income,23,2000,2022,23
+PLW,Palau,High income,23,2000,2022,23
+PAN,Panama,High income,23,2000,2022,23
+PNG,Papua New Guinea,Lower middle income,23,2000,2022,23
+PRY,Paraguay,Upper middle income,23,2000,2022,23
+PER,Peru,Upper middle income,23,2000,2022,23
+PHL,Philippines,Lower middle income,23,2000,2022,23
+POL,Poland,High income,23,2000,2022,23
+PRT,Portugal,High income,23,2000,2022,23
+QAT,Qatar,High income,23,2000,2022,23
+ROU,Romania,High income,23,2000,2022,23
+RUS,Russian Federation,High income,23,2000,2022,23
+RWA,Rwanda,Low income,23,2000,2022,23
+WSM,Samoa,Lower middle income,23,2000,2022,23
+SMR,San Marino,High income,23,2000,2022,23
+STP,Sao Tome and Principe,Lower middle income,23,2000,2022,23
+SAU,Saudi Arabia,High income,23,2000,2022,23
+SEN,Senegal,Lower middle income,23,2000,2022,23
+SRB,Serbia,Upper middle income,23,2000,2022,23
+SYC,Seychelles,High income,23,2000,2022,23
+SLE,Sierra Leone,Low income,23,2000,2022,23
+SGP,Singapore,High income,23,2000,2022,23
+SVK,Slovak Republic,High income,23,2000,2022,23
+SVN,Slovenia,High income,23,2000,2022,23
+SLB,Solomon Islands,Lower middle income,23,2000,2022,23
+SOM,Somalia,Low income,10,2013,2022,10
+ZAF,South Africa,Upper middle income,23,2000,2022,23
+ESP,Spain,High income,23,2000,2022,23
+LKA,Sri Lanka,Lower middle income,23,2000,2022,23
+KNA,St. Kitts and Nevis,High income,23,2000,2022,23
+LCA,St. Lucia,Upper middle income,23,2000,2022,23
+VCT,St. Vincent and the Grenadines,Upper middle income,23,2000,2022,23
+SDN,Sudan,Low income,23,2000,2022,23
+SUR,Suriname,Upper middle income,23,2000,2022,23
+SWE,Sweden,High income,23,2000,2022,23
+CHE,Switzerland,High income,23,2000,2022,23
+SYR,Syrian Arab Republic,Low income,23,2000,2022,23
+TJK,Tajikistan,Lower middle income,23,2000,2022,23
+TZA,Tanzania,Lower middle income,23,2000,2022,23
+THA,Thailand,Upper middle income,23,2000,2022,23
+TLS,Timor-Leste,Lower middle income,20,2003,2022,20
+TGO,Togo,Low income,23,2000,2022,23
+TON,Tonga,Upper middle income,23,2000,2022,23
+TTO,Trinidad and Tobago,High income,23,2000,2022,23
+TUN,Tunisia,Lower middle income,23,2000,2022,23
+TUR,Turkiye,Upper middle income,23,2000,2022,23
+TKM,Turkmenistan,Upper middle income,23,2000,2022,23
+TUV,Tuvalu,Upper middle income,23,2000,2022,23
+UGA,Uganda,Low income,23,2000,2022,23
+UKR,Ukraine,Upper middle income,22,2000,2021,22
+ARE,United Arab Emirates,High income,23,2000,2022,23
+GBR,United Kingdom,High income,23,2000,2022,23
+USA,United States,High income,23,2000,2022,23
+URY,Uruguay,High income,23,2000,2022,23
+UZB,Uzbekistan,Lower middle income,23,2000,2022,23
+VUT,Vanuatu,Lower middle income,23,2000,2022,23
+VNM,Viet Nam,Lower middle income,23,2000,2022,23
+PSE,West Bank and Gaza,Lower middle income,23,2000,2022,23
+YEM,"Yemen, Rep.",Low income,23,2000,2022,23
+ZMB,Zambia,Lower middle income,23,2000,2022,23
+ZWE,Zimbabwe,Lower middle income,13,2010,2022,13

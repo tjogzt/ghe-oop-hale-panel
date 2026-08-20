@@ -1,0 +1,13 @@
+metric,value
+n_iterations,100
+n_treated_each,25
+real_beta_t5,-0.513733090688681
+real_p_t5,0.0612887102441609
+real_beta_t4,-0.436247610315423
+real_p_t4,0.0826288013680233
+placebo_mean_beta_t5,0.0465195967244259
+placebo_sd_beta_t5,0.342985008696641
+pct_sig_neg_t5,1
+pct_sig_neg_t4,2
+pct_sig_neg_t5_p10,2
+real_percentile_t5,3
