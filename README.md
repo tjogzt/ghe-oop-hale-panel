@@ -7,10 +7,10 @@
 ## A Global Country-Year Panel Analysis
 
 ### Authors
-Tao Zhu¹²✉  (and co-authors; see manuscript title page)
+Qingqing Mo¹², Pingbo Chen¹², Cheng Xu¹², Ya Wang¹², Ting Hu¹², Qian Sun¹², Tao Zhu¹²✉
 
-¹ Department of Obstetrics and Gynecology, Tongji Hospital, Tongji Medical College, Huazhong University of Science and Technology, Wuhan, China
-² Key Laboratory of Cancer Invasion and Metastasis, Ministry of Education, Tongji Hospital, HUST, Wuhan, China
+¹ Department of Obstetrics and Gynecology, National Clinical Research Center for Obstetrics and Gynecology, Tongji Hospital, Tongji Medical College, Huazhong University of Science and Technology, Wuhan, China
+² Key Laboratory of Cancer Invasion and Metastasis (Ministry of Education), Tongji Hospital, Tongji Medical College, Huazhong University of Science and Technology, Wuhan, China
 ✉ zhutao@tjh.tjmu.edu.cn
 
 ---
