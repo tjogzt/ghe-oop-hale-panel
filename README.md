@@ -30,13 +30,14 @@ This repository contains the complete replication package for the manuscript *"D
 
 ```
 ghe-oop-hale-panel/
-├── code/                          # 43 analysis scripts (R 4.5.0 primary; Python 3.9+ utilities)
+├── code/                          # 30 analysis scripts (R 4.5.0 primary; Python 3.9+ utilities)
 │   ├── 01_main_analysis.R         # Primary TWFE analysis
 │   ├── 03_event_study.R           # Event study around GHE spikes (ref k = −5)
 │   ├── 04_mediation_oop.R         # OOP pathway decomposition
 │   ├── 10_wild_bootstrap_E5.R     # Low-income wild cluster bootstrap
 │   ├── A2_synthetic_control_reforms.R  # SCM case studies
-│   └── ...                        # Full pipeline, see README below
+│   ├── archive/                   # One-off development scripts (not part of the pipeline)
+│   └── ...                        # Full pipeline: 01–15, A1–A3, B1–B4, C1–C4
 ├── results/
 │   ├── tables/                    # All analysis tables (CSV)
 │   ├── figures/                   # Publication figures (PDF, Wong colour-blind palette)

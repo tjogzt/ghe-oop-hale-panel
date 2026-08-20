@@ -30,13 +30,14 @@
 
 ```
 ghe-oop-hale-panel/
-├── code/                          # 43个分析脚本（R 4.5.0为主；Python 3.9+工具）
+├── code/                          # 30个分析脚本（R 4.5.0为主；Python 3.9+工具）
 │   ├── 01_main_analysis.R         # 主TWFE分析
 │   ├── 03_event_study.R           # GHE激增事件研究（参考期 k = −5）
 │   ├── 04_mediation_oop.R         # OOP路径分解
 │   ├── 10_wild_bootstrap_E5.R     # 低收入组wild cluster bootstrap
 │   ├── A2_synthetic_control_reforms.R  # SCM案例研究
-│   └── ...                        # 完整管线见README.md
+│   ├── archive/                   # 一次性开发脚本（不属于正式管线）
+│   └── ...                        # 完整管线：01–15、A1–A3、B1–B4、C1–C4
 ├── results/
 │   ├── tables/                    # 全部分析表（CSV）
 │   ├── figures/                   # 出版图（PDF，Wong色盲友好调色板）
