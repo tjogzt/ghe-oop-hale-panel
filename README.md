@@ -26,6 +26,12 @@ This repository contains the complete replication package for the manuscript *"D
 - The low-income stratum shows a positive association (β = +0.85; wild cluster bootstrap-t p = 0.065), robust to leave-one-out re-estimation (+0.66 to +1.02), concentrated in the MDG era (+1.27, p = 0.038) and attenuated to null in the SDG era (+0.03, p = 0.928).
 - GHE is associated with improved financial protection: each percentage point of GDP shifted into public financing corresponds to an ≈11% relative reduction in out-of-pocket spending (indirect effect a×b = +0.10; bootstrap 95% CI +0.02 to +0.24).
 
+### Study design
+
+![Study design and analysis framework](docs/study_design_flow.png)
+
+Study design, sample construction (4,370 → 4,314 → 4,304 country-years; 189 countries), and analytical framework (primary TWFE, event studies, synthetic control, OOP pathway decomposition, low-income bootstrap robustness, income-group and era heterogeneity).
+
 ---
 
 ## Repository Structure
