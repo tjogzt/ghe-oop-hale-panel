@@ -1,5 +1,7 @@
 # Government Health Expenditure, Out-of-Pocket Spending, and Healthy Life Expectancy in 190 Countries, 2000–2022
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22028177.svg)](https://doi.org/10.5281/zenodo.22028177)
+
 ## A Global Country-Year Panel Analysis
 
 ### Authors
