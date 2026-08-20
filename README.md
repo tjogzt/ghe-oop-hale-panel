@@ -2,6 +2,8 @@
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22028649-003399.svg)](https://doi.org/10.5281/zenodo.22028649)
 
+[English](README.md) | [简体中文](README_zh.md)
+
 ## A Global Country-Year Panel Analysis
 
 ### Authors
