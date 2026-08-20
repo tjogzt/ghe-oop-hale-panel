@@ -31,7 +31,7 @@ idx3 = sc.find(old3)
 if idx3 > 0:
     end3 = sc.find(r'\end{enumerate}', idx3) + len(r'\end{enumerate}')
     old_block3 = sc[idx3:end3]
-    new_block3 = r'''Pipeline A (Claude, DeepSeek V4 Pro) used MICE multiple imputation ($m = 20$) with 20 sensitivity analyses. Pipeline B (Codex, Kimi K3 via OpenRouter) used complete-case analysis with 10 sensitivity analyses. Pipeline C (Coordinator) implemented event studies, synthetic control, mediation, temporal aggregation, and the horse-race model on the primary analytical sample. All pipelines were implemented in R.'''
+    new_block3 = r'''Pipeline A (Claude, DeepSeek V4 Pro) used MICE multiple imputation ($m = 20$) with 20 sensitivity analyses. Pipeline B (Alt, Kimi K3 via OpenRouter) used complete-case analysis with 10 sensitivity analyses. Pipeline C (Coordinator) implemented event studies, synthetic control, mediation, temporal aggregation, and the horse-race model on the primary analytical sample. All pipelines were implemented in R.'''
     sc = sc.replace(old_block3, new_block3)
     n += 1
     print('F3: Pipelines → prose')

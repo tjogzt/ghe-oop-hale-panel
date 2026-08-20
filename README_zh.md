@@ -38,7 +38,7 @@ ghe-oop-hale-panel/
 ├── results/
 │   ├── tables/                    # 全部分析表（CSV）
 │   └── figures/                   # 出版图（PDF，Wong色盲友好调色板）
-├── results_codex/                 # 模型对象与处理后面板（RDS）
+├── results/panel/                 # 模型对象与处理后面板（RDS）
 ├── manuscript/                    # LaTeX源文件+编译PDF
 ├── submission/                    # STROBE/GATHER清单、文献筛选台账
 └── data/                          # 数据字典与处理说明
@@ -50,7 +50,7 @@ ghe-oop-hale-panel/
 - **随机种子**：所有随机过程 seed = 49
 - **数据来源**（均为公开数据）：GBD 2023 Results Tool（HALE）、World Bank WDI API（GHE/GDP/OOP/协变量）、WGI 2025（治理）、IMF GFS（税收）
 - **管线顺序**：01 → 02 → … → 15，随后 A1–C4 补充脚本
-- 编译手稿：`manuscript/main_manuscript.pdf`、`supplementary_materials.pdf`、`cover_letter.pdf`
+- 图为单panel PDF（`results/figures/`）；表为CSV（`results/tables/`）。
 
 ## 许可
 

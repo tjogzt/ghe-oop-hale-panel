@@ -89,12 +89,12 @@ if(file.exists("results_claude/tables/robustness_checks_summary.csv")) {
   cat(sprintf("Claude: %d robustness checks\n", nrow(rob_claude)))
 }
 
-# ---- Table S5: Robustness from Codex pipeline ----
-cat("\n=== Table S5: Codex Robustness ===\n")
-if(file.exists("results_codex/tables/table4_robustness_ghe.csv")) {
-  rob_codex <- fread("results_codex/tables/table4_robustness_ghe.csv")
-  fwrite(rob_codex, "results/tables/supplementary/Table_S5_Robustness_Codex.csv")
-  cat(sprintf("Codex: %d robustness checks\n", nrow(rob_codex)))
+# ---- Table S5: Robustness from Alt pipeline ----
+cat("\n=== Table S5: Alt Robustness ===\n")
+if(file.exists("results/panel/tables/table4_robustness_ghe.csv")) {
+  rob_alt <- fread("results/panel/tables/table4_robustness_ghe.csv")
+  fwrite(rob_alt, "results/tables/supplementary/Table_S5_Robustness_Alt.csv")
+  cat(sprintf("Alt pipeline: %d robustness checks\n", nrow(rob_alt)))
 }
 
 # ---- Table S6: Long Difference by Country ----

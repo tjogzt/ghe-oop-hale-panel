@@ -38,7 +38,7 @@ ghe-oop-hale-panel/
 ├── results/
 │   ├── tables/                    # All analysis tables (CSV)
 │   └── figures/                   # Publication figures (PDF, Wong colour-blind palette)
-├── results_codex/                 # Model objects and processed panel (RDS)
+├── results/panel/                 # Model objects and processed panel (RDS)
 ├── manuscript/                    # LaTeX source + compiled PDFs
 ├── submission/                    # STROBE/GATHER checklists, screening records
 └── data/                          # Data dictionary and processing notes
@@ -50,7 +50,7 @@ ghe-oop-hale-panel/
 - **Random seed**: 49 for all stochastic procedures.
 - **Data sources** (all public): GBD 2023 Results Tool (HALE), World Bank WDI API (GHE, GDP, OOP, covariates), WGI 2025 (governance), IMF GFS (tax revenue).
 - **Pipeline order**: 01 → 02 → … → 15, then A1–C4 supplementary scripts.
-- Compiled manuscripts: `manuscript/main_manuscript.pdf`, `supplementary_materials.pdf`, `cover_letter.pdf`.
+- Figures are single-panel PDFs in `results/figures/`; tables as CSV in `results/tables/`.
 
 ## License
 

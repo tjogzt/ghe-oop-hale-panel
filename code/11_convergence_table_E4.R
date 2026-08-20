@@ -8,7 +8,7 @@ setwd(PROJ)
 
 # Read key results from all three pipelines
 # Pipeline A: Claude (code_claude/)
-# Pipeline B: Codex (code_codex/)
+# Pipeline B: independent replication pipeline
 # Pipeline C: Coordinator (our main results)
 
 cat("=== E4: Three-Pipeline Convergence Table ===\n")
@@ -21,8 +21,8 @@ coord_income <- fread("results/tables/income_heterogeneity.csv")
 claude_main <- fread("results_claude/tables/all_estimates_summary.csv")
 claude_income <- fread("results_claude/tables/subgroup_by_income.csv")
 
-# Codex results (from original pipeline)
-codex_main <- fread("results_codex/tables/table5_key_estimates.csv")
+# Alt results (from original pipeline)
+alt_main <- fread("results/panel/tables/table5_key_estimates.csv")
 
 # Build convergence table
 conv <- data.table(
@@ -59,11 +59,11 @@ conv <- data.table(
     claude_income[Model=="Subgroup_Upper-middle", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
     claude_income[Model=="Subgroup_High", sprintf("%.3f (p=%.3f)", Coefficient, p_value)]
   ),
-  Codex = c(
-    codex_main[model=="OLS_3_full_controls", sprintf("%.3f (p=%.3f)", estimate, p_value)],
-    codex_main[model=="TWFE_3_full_controls", sprintf("%.3f (p=%.3f)", estimate, p_value)],
+  Alt = c(
+    alt_main[model=="OLS_3_full_controls", sprintf("%.3f (p=%.3f)", estimate, p_value)],
+    alt_main[model=="TWFE_3_full_controls", sprintf("%.3f (p=%.3f)", estimate, p_value)],
     "—",
-    codex_main[model=="LongDiff_2000_latest", sprintf("%.3f (p=%.3f)", estimate, p_value)],
+    alt_main[model=="LongDiff_2000_latest", sprintf("%.3f (p=%.3f)", estimate, p_value)],
     "—",
     "—",
     "—",

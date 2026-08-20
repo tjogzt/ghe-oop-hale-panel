@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply Codex AI-writing cleanup to all three manuscripts"""
+"""Apply Alt AI-writing cleanup to all three manuscripts"""
 import re
 
 MANUSCRIPT = '/Users/taozhu/my researches/lancet_financial_v3/manuscript/main_manuscript.tex'

@@ -26,7 +26,7 @@ theme_pub <- theme_bw(base_size=8) +
         axis.title=element_text(size=8), axis.text=element_text(size=7))
 
 # ---- Load ----
-dt <- as.data.table(readRDS("results_codex/panel_analysis.rds"))
+dt <- as.data.table(readRDS("results/panel/panel_analysis.rds"))
 dt[, ln_gdppc := log(gdp_per_capita_ppp)]
 dt[, income_base := as.character(income_base)]
 dt[, region := NULL]
