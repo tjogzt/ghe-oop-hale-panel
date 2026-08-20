@@ -37,9 +37,8 @@ ghe-oop-hale-panel/
 │   └── ...                        # 完整管线见README.md
 ├── results/
 │   ├── tables/                    # 全部分析表（CSV）
-│   └── figures/                   # 出版图（PDF，Wong色盲友好调色板）
-├── results/panel/                 # 模型对象与处理后面板（RDS）
-├── manuscript/                    # LaTeX源文件+编译PDF
+│   ├── figures/                   # 出版图（PDF，Wong色盲友好调色板）
+│   └── panel/                     # 模型对象与处理后面板（RDS）
 ├── submission/                    # STROBE/GATHER清单、文献筛选台账
 └── data/                          # 数据字典与处理说明
 ```

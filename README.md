@@ -37,9 +37,8 @@ ghe-oop-hale-panel/
 │   └── ...                        # Full pipeline, see README below
 ├── results/
 │   ├── tables/                    # All analysis tables (CSV)
-│   └── figures/                   # Publication figures (PDF, Wong colour-blind palette)
-├── results/panel/                 # Model objects and processed panel (RDS)
-├── manuscript/                    # LaTeX source + compiled PDFs
+│   ├── figures/                   # Publication figures (PDF, Wong colour-blind palette)
+│   └── panel/                     # Model objects and processed panel (RDS)
 ├── submission/                    # STROBE/GATHER checklists, screening records
 └── data/                          # Data dictionary and processing notes
 ```
