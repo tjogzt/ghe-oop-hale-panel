@@ -1,0 +1,3 @@
+check,coef,se,p,stat,n
+population_weighted_twfe,-0.3398279007043,0.175853068667981,0.0548063990041705,,4304
+joint_test_income_interactions,,,0.033088703761593,2.97095706898244,4304

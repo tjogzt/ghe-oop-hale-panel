@@ -22,7 +22,14 @@ dir.create("results/figures", recursive=TRUE, showWarnings=FALSE)
 PAL <- c(zhusha="#C23531", shiqing="#3D6BA8", yanzhi="#9D2933", dianqing="#177CB0")
 INC_COL <- c("Low income"="#9D2933","Lower middle income"="#C23531",
              "Upper middle income"="#177CB0","High income"="#3D6BA8")
-theme_pub <- theme_bw(base_size=8) +
+theme_pub <- theme_classic(base_size=7) +
+  theme(panel.grid.minor=element_blank(),
+        panel.grid.major=element_line(colour="grey92", linewidth=0.3),
+        panel.border=element_blank(),
+        plot.title=element_text(face="bold", size=9),
+        axis.title=element_text(size=7),
+        axis.text=element_text(size=7),
+        legend.text=element_text(size=7)) +
   theme(panel.grid.minor=element_blank(),
         plot.title=element_text(face="bold",size=9),
         axis.title=element_text(size=8), axis.text=element_text(size=7))
@@ -96,6 +103,11 @@ m10 <- feols(hale ~ ghe_share_gdp + ln_gdppc + urbanization + fertility_rate | i
              data=p10, vcov=~iso3c)
 cat(sprintf("10yr TWFE (GHE/GDP):    β=%.4f (SE=%.4f, p=%.4f)\n",
             coef(m10)["ghe_share_gdp"], se(m10)["ghe_share_gdp"], pvalue(m10)["ghe_share_gdp"]))
+
+m10b <- feols(hale ~ ln_ghe_pc + ln_gdppc + urbanization + fertility_rate | iso3c + period10,
+              data=p10, vcov=~iso3c)
+cat(sprintf("10yr TWFE (GHE pc PPP): β=%.4f (SE=%.4f, p=%.4f)\n",
+            coef(m10b)["ln_ghe_pc"], se(m10b)["ln_ghe_pc"], pvalue(m10b)["ln_ghe_pc"]))
 
 # Long difference (10-year): change 2000-2004 → 2015-2019
 p5_first <- p5[period5==2000]
@@ -263,6 +275,7 @@ summary_dt <- data.table(
     "5yr TWFE (GHE/GDP)",
     "5yr TWFE (GHE pc PPP)",
     "10yr TWFE (GHE/GDP)",
+    "10yr TWFE (GHE pc PPP)",
     "Annual TWFE (GHE/GDP)",
     "Annual TWFE (GHE pc PPP)",
     "DiD: 6 reforms pooled",
@@ -270,21 +283,21 @@ summary_dt <- data.table(
     "U5MR: GHE→log(U5MR)"
   ),
   Coefficient = c(
-    coef(m5a)["ghe_share_gdp"], coef(m5b)["ln_ghe_pc"], coef(m10)["ghe_share_gdp"],
+    coef(m5a)["ghe_share_gdp"], coef(m5b)["ln_ghe_pc"], coef(m10)["ghe_share_gdp"], coef(m10b)["ln_ghe_pc"],
     coef(m_gdp)["ghe_share_gdp"], coef(m_pc)["ln_ghe_pc"],
     coef(did_fit)["post"],
     if(exists("a_elec")) coef(a_elec)["ghe_share_gdp"] else NA,
     if(exists("m_u5")) coef(m_u5)["ghe_share_gdp"] else NA
   ),
   SE = c(
-    se(m5a)["ghe_share_gdp"], se(m5b)["ln_ghe_pc"], se(m10)["ghe_share_gdp"],
+    se(m5a)["ghe_share_gdp"], se(m5b)["ln_ghe_pc"], se(m10)["ghe_share_gdp"], se(m10b)["ln_ghe_pc"],
     se(m_gdp)["ghe_share_gdp"], se(m_pc)["ln_ghe_pc"],
     se(did_fit)["post"],
     if(exists("a_elec")) se(a_elec)["ghe_share_gdp"] else NA,
     if(exists("m_u5")) se(m_u5)["ghe_share_gdp"] else NA
   ),
   P = c(
-    pvalue(m5a)["ghe_share_gdp"], pvalue(m5b)["ln_ghe_pc"], pvalue(m10)["ghe_share_gdp"],
+    pvalue(m5a)["ghe_share_gdp"], pvalue(m5b)["ln_ghe_pc"], pvalue(m10)["ghe_share_gdp"], pvalue(m10b)["ln_ghe_pc"],
     pvalue(m_gdp)["ghe_share_gdp"], pvalue(m_pc)["ln_ghe_pc"],
     pvalue(did_fit)["post"],
     if(exists("a_elec")) pvalue(a_elec)["ghe_share_gdp"] else NA,
@@ -318,12 +331,12 @@ compare_dt[, Specification := factor(Specification, levels=rev(Specification))]
 p_compare <- ggplot(compare_dt, aes(x=Coef, y=Specification)) +
   geom_vline(xintercept=0, linetype="dashed", color="grey50", linewidth=0.3) +
   geom_point(size=3, color=PAL["shiqing"]) +
-  geom_errorbarh(aes(xmin=ci_low, xmax=ci_high), height=0.2, linewidth=1.2, color=PAL["shiqing"]) +
+  geom_errorbar(aes(xmin=ci_low, xmax=ci_high, y=Specification), width=0.2, linewidth=1.2, color=PAL["shiqing"], orientation="y") +
   labs(x="GHE Coefficient", y="",
        title="Temporal Aggregation: Annual vs 5yr vs 10yr Panels",
        subtitle="Consistent null/negative finding regardless of time structure") +
   theme_pub
-ggsave("results/figures/fig8_temporal_aggregation.pdf", p_compare, width=7, height=4, device=cairo_pdf)
+ggsave("results/figures/fig8_temporal_aggregation.pdf", p_compare, width=168, height=95, units="mm", device=cairo_pdf)
 cat("Saved: fig8_temporal_aggregation.pdf\n")
 
 cat("\n=== All Advanced Analyses Complete ===\n")

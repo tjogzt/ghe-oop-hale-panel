@@ -83,10 +83,10 @@ fwrite(cor_dt, "results/tables/supplementary/Table_S3_CorrelationMatrix.csv")
 
 # ---- Table S4: Robustness from Claude pipeline ----
 cat("\n=== Table S4: Claude Robustness ===\n")
-if(file.exists("results_claude/tables/robustness_checks_summary.csv")) {
-  rob_claude <- fread("results_claude/tables/robustness_checks_summary.csv")
-  fwrite(rob_claude, "results/tables/supplementary/Table_S4_Robustness_Claude.csv")
-  cat(sprintf("Claude: %d robustness checks\n", nrow(rob_claude)))
+if(file.exists("results_alt/tables/robustness_checks_summary.csv")) {
+  rob_alt <- fread("results_alt/tables/robustness_checks_summary.csv")
+  fwrite(rob_alt, "results/tables/supplementary/Table_S4_Robustness_Alt.csv")
+  cat(sprintf("Alt pipeline: %d robustness checks\n", nrow(rob_alt)))
 }
 
 # ---- Table S5: Robustness from Alt pipeline ----

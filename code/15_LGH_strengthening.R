@@ -17,8 +17,10 @@ dir.create("results/tables", recursive=TRUE, showWarnings=FALSE)
 PAL <- c(zhusha="#C23531", shiqing="#3D6BA8", yanzhi="#9D2933", dianqing="#177CB0")
 theme_lancet <- theme_bw(base_size=10) + theme(
   panel.grid.minor=element_blank(),
+  panel.grid.major=element_line(linewidth=0.2, color="grey90"),
   plot.title=element_text(face="bold",size=11),
-  axis.title=element_text(size=9.5), axis.text=element_text(size=8))
+  axis.title=element_text(size=9.5), axis.text=element_text(size=8),
+  legend.text=element_text(size=8), legend.title=element_text(size=9))
 
 # ---- Load data ----
 df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
@@ -62,15 +64,14 @@ p_loo <- ggplot(loo_dt, aes(x=coef, y=label)) +
   geom_vline(xintercept=full_coef, linetype="dashed", color=PAL["zhusha"], linewidth=0.5) +
   geom_vline(xintercept=0, linetype="dotted", color="grey50", linewidth=0.3) +
   geom_point(size=2.5, color=PAL["shiqing"]) +
-  geom_errorbarh(aes(xmin=ci_low, xmax=ci_high), color=PAL["shiqing"], height=0.2, linewidth=0.8) +
-  annotate("text", x=full_coef, y=nrow(loo_dt)+0.8, 
+  geom_errorbar(aes(xmin=ci_low, xmax=ci_high, y=label), color=PAL["shiqing"], width=0.2, linewidth=0.8, orientation="y") +
+  annotate("text", x=full_coef + 0.06, y=nrow(loo_dt)+0.8, 
            label=sprintf("Full LIC: +%.3f (SE=%.3f, p=%.3f)", full_coef, full_se, pvalue(fit_full)["ghe_share_gdp"]),
            size=3, color=PAL["zhusha"], hjust=0) +
-  labs(x="GHE coefficient (excluded country)", y="",
-       title="LIC Leave-One-Out: GHE-HALE coefficient excluding each country",
-       subtitle=sprintf("G=%d LICs. Dashed line = full-LIC estimate.", full_n)) +
+  scale_y_discrete(expand=expansion(mult=c(0, 0), add=c(0.6, 1.0))) +
+  labs(x="GHE coefficient (excluded country)", y="") +
   theme_lancet
-ggsave("results/figures/LGH1_lic_loo.pdf", p_loo, width=8, height=6, device=cairo_pdf)
+ggsave("results/figures/figS9_lic_loo.pdf", p_loo, width=168, height=126, units="mm", device=cairo_pdf)
 fwrite(loo_dt, "results/tables/LGH1_lic_loo.csv")
 cat(sprintf("LOO range: [%.4f, %.4f]\n", min(loo_dt$coef), max(loo_dt$coef)))
 
@@ -93,12 +94,9 @@ p_dose <- ggplot(df_low, aes(x=ghe_share_gdp, y=hale)) +
   geom_point(alpha=0.3, size=1.5, color="grey60") +
   geom_smooth(method="lm", formula=y~x+I(x^2), se=TRUE,
               fill=PAL["shiqing"], alpha=0.15, color=PAL["shiqing"], linewidth=1) +
-  labs(x="GHE (% GDP)", y="HALE (years)",
-       title="LIC Dose-Response: GHE vs HALE (quadratic fit)",
-       subtitle=sprintf("N=%d country-years, G=%d LICs. Controls: GDP, urban, fertility. Country+Year FE not shown.",
-                        nrow(df_low), full_n)) +
+  labs(x="GHE (% GDP)", y="HALE (years)") +
   theme_lancet
-ggsave("results/figures/LGH2_lic_doseresponse.pdf", p_dose, width=7, height=5, device=cairo_pdf)
+ggsave("results/figures/figS10_lic_doseresponse.pdf", p_dose, width=170, height=121.4, units="mm", device=cairo_pdf)
 fwrite(data.table(coef=coef(fit_quad), se=se(fit_quad), p=pvalue(fit_quad)), 
        "results/tables/LGH2_doseresponse.csv")
 cat("Dose-response saved\n")
@@ -131,12 +129,10 @@ p_lag <- ggplot(lag_dt, aes(x=lag, y=coef)) +
   geom_ribbon(aes(ymin=ci_low, ymax=ci_high), fill=PAL["shiqing"], alpha=0.15) +
   geom_line(color=PAL["shiqing"], linewidth=0.9) +
   geom_point(size=3, color=PAL["shiqing"]) +
-  scale_x_continuous(breaks=0:3, labels=c("t","t-1","t-2","t-3")) +
-  labs(x="GHE measured at", y="GHE coefficient (HALE yrs per %GDP)",
-       title="LIC Lag Structure: Does the GHE-HALE association build over time?",
-       subtitle=sprintf("G=%d LICs. Country+Year FE with controls.", full_n)) +
+  scale_x_reverse(breaks=0:3, labels=c("t","t-1","t-2","t-3")) +
+  labs(x="GHE lag (years)", y="GHE coefficient (HALE yrs per %GDP)") +
   theme_lancet
-ggsave("results/figures/LGH3_lic_lagstructure.pdf", p_lag, width=6, height=4.5, device=cairo_pdf)
+ggsave("results/figures/figS11_lic_lagstructure.pdf", p_lag, width=168, height=126, units="mm", device=cairo_pdf)
 fwrite(lag_dt, "results/tables/LGH3_lagstructure.csv")
 cat("Lag structure saved\n")
 
@@ -175,12 +171,10 @@ p_rev <- ggplot(rev_dt, aes(x=hale_lag, y=coef)) +
   geom_ribbon(aes(ymin=ci_low, ymax=ci_high), fill=PAL["zhusha"], alpha=0.15) +
   geom_line(color=PAL["zhusha"], linewidth=0.9) +
   geom_point(size=3, color=PAL["zhusha"]) +
-  scale_x_continuous(breaks=0:2, labels=c("t","t-1","t-2")) +
-  labs(x="HALE measured at", y="Coefficient (GHE %GDP per HALE year)",
-       title="Reverse Causality Check: Does past HALE predict future GHE?",
-       subtitle=sprintf("G=%d LICs. Country+Year FE. If reverse causality: should see past HALE→GHE.", full_n)) +
+  scale_x_reverse(breaks=0:2, labels=c("t","t-1","t-2")) +
+  labs(x="HALE lag (years)", y="Coefficient (GHE %GDP per HALE year)") +
   theme_lancet
-ggsave("results/figures/LGH4_lic_reversecausality.pdf", p_rev, width=6, height=4.5, device=cairo_pdf)
+ggsave("results/figures/figS12_lic_reversecausality.pdf", p_rev, width=168, height=126, units="mm", device=cairo_pdf)
 fwrite(rev_dt, "results/tables/LGH4_reversecausality.csv")
 cat("Reverse causality saved\n")
 

@@ -7,7 +7,7 @@ PROJ <- "/Users/taozhu/my researches/lancet_financial_v3"
 setwd(PROJ)
 
 # Read key results from all three pipelines
-# Pipeline A: Claude (code_claude/)
+# Pipeline A (alternative replication) (code_alt/)
 # Pipeline B: independent replication pipeline
 # Pipeline C: Coordinator (our main results)
 
@@ -18,8 +18,8 @@ coord_main <- fread("results/tables/main_results.csv")
 coord_income <- fread("results/tables/income_heterogeneity.csv")
 
 # Claude results (from original pipeline)
-claude_main <- fread("results_claude/tables/all_estimates_summary.csv")
-claude_income <- fread("results_claude/tables/subgroup_by_income.csv")
+alt_main <- fread("results_alt/tables/all_estimates_summary.csv")
+alt_income <- fread("results_alt/tables/subgroup_by_income.csv")
 
 # Alt results (from original pipeline)
 alt_main <- fread("results/panel/tables/table5_key_estimates.csv")
@@ -49,15 +49,15 @@ conv <- data.table(
     coord_income[income_group=="High income", sprintf("%.3f (p=%.3f)", coef, p)]
   ),
   Claude = c(
-    claude_main[Model=="M1_Pooled_OLS", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
-    claude_main[Model=="M2_TWFE_IMP", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
+    alt_main[Model=="M1_Pooled_OLS", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
+    alt_main[Model=="M2_TWFE_IMP", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
     "—",
     "—",
     "—",
-    claude_income[Model=="Subgroup_Low", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
-    claude_income[Model=="Subgroup_Lower-middle", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
-    claude_income[Model=="Subgroup_Upper-middle", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
-    claude_income[Model=="Subgroup_High", sprintf("%.3f (p=%.3f)", Coefficient, p_value)]
+    alt_income[Model=="Subgroup_Low", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
+    alt_income[Model=="Subgroup_Lower-middle", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
+    alt_income[Model=="Subgroup_Upper-middle", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
+    alt_income[Model=="Subgroup_High", sprintf("%.3f (p=%.3f)", Coefficient, p_value)]
   ),
   Alt = c(
     alt_main[model=="OLS_3_full_controls", sprintf("%.3f (p=%.3f)", estimate, p_value)],

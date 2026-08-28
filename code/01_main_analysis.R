@@ -183,15 +183,21 @@ forest_data[, Model := factor(Model, levels=rev(Model))]
 
 p2 <- ggplot(forest_data, aes(x=Coef, y=Model)) +
   geom_vline(xintercept=0, linetype="dashed", color="grey50", linewidth=0.3) +
-  geom_point(aes(color=sig), size=3) +
-  geom_errorbarh(aes(xmin=ci_low, xmax=ci_high, color=sig), height=0.2, linewidth=1) +
+  geom_point(aes(color=sig), size=3.5) +
+  geom_errorbarh(aes(xmin=ci_low, xmax=ci_high, color=sig), height=0.2, linewidth=1.5) +
   scale_color_manual(values=c("p<0.01"=PAL["yanzhi"],"p<0.05"=PAL["zhusha"],
-                               "p<0.10"=PAL["dianqing"],"n.s."="grey50")) +
+                               "p<0.10"=PAL["dianqing"],"n.s."="grey50"),
+                     name="Significance",
+                     breaks=c("p<0.01","p<0.05","p<0.10","n.s.")) +
   labs(x="GHE coefficient (years HALE per %GDP)", y="",
        title="GHE-HALE Association Across Specifications",
-       color="") +
-  theme_pub
-ggsave("results/figures/fig2_forest.pdf", p2, width=8, height=5, device=cairo_pdf)
+       color="Significance") +
+  theme_pub +
+  theme(legend.position="bottom",
+        legend.title=element_text(size=7),
+        panel.border=element_blank(),
+        axis.line=element_line(colour="grey40", linewidth=0.4))
+ggsave("results/figures/fig2_forest.pdf", p2, width=170, height=106.25, units="mm", device=cairo_pdf)
 cat("Saved: fig2_forest.pdf\n")
 
 # Figure 3: HALE trends by income group — all countries rise regardless of GHE
@@ -222,7 +228,7 @@ p4a <- ggplot(unique(df_analysis[, .(iso3c, income, ghe_mean, hale_mean)]),
   geom_smooth(method="lm", se=TRUE, color="black", linewidth=0.8, alpha=0.15) +
   scale_color_manual(values=INC_COL) +
   labs(x="Mean GHE (%GDP)", y="Mean HALE (years)", 
-       title="BETWEEN Countries (r≈0.85)", color="") +
+       title="BETWEEN Countries (r = 0.54)", color="") +
   theme_pub
 
 # Within
@@ -231,7 +237,7 @@ p4b <- ggplot(df_analysis, aes(x=ghe_dev, y=hale_dev, color=income)) +
   geom_smooth(method="lm", se=TRUE, color="black", linewidth=0.8, alpha=0.15) +
   scale_color_manual(values=INC_COL) +
   labs(x="GHE Deviation from Country Mean", y="HALE Deviation from Country Mean",
-       title="WITHIN Countries (r≈−0.02)", color="") +
+       title="WITHIN Countries (r = +0.14)", color="") +
   theme_pub
 
 p4 <- gridExtra::grid.arrange(p4a, p4b, ncol=2)

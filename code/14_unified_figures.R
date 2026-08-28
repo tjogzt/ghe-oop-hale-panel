@@ -220,10 +220,34 @@ ggsave("results/figures/B3_austerity_mirror.pdf", p4, width=7, height=5, device=
 cat("Fig4 (austerity mirror) saved\n")
 
 # ========================================================================
+# SUPPLEMENTARY FIGURE S14: Dual-panel event studies (spikes | austerity)
+# ========================================================================
+mirror_data[, type_lab := ifelse(grepl("Spike", type),
+                                 sprintf("A: GHE spikes (N = %d)", uniqueN(es_data$iso3c)),
+                                 sprintf("B: Austerity episodes (N = %d)", uniqueN(aust_es_data$iso3c)))]
+p_s14 <- ggplot(mirror_data, aes(x=t_rel, y=coef, color=type, fill=type)) +
+  geom_hline(yintercept=0, linetype="dashed", color="grey50", linewidth=0.3) +
+  geom_vline(xintercept=0, linetype="solid", color="grey40", linewidth=0.5) +
+  geom_ribbon(aes(ymin=ci_low, ymax=ci_high), alpha=0.12, color=NA) +
+  geom_line(linewidth=0.9) +
+  geom_point(size=2.2) +
+  facet_wrap(~type_lab, ncol=2, scales="fixed") +
+  scale_color_manual(values=c("Spike (>2pp increase)"="#D55E00",
+                              "Austerity (>1.5pp decrease)"="#0072B2")) +
+  scale_fill_manual(values=c("Spike (>2pp increase)"="#D55E00",
+                             "Austerity (>1.5pp decrease)"="#0072B2")) +
+  scale_x_continuous(breaks=seq(-5, 10, 2)) +
+  labs(x="Years since event", y="HALE change (years)") +
+  theme_lancet + theme(legend.position="none")
+ggsave("results/figures/figS14_event_austerity.pdf", p_s14, width=170, height=80, units="mm", device=cairo_pdf)
+cat("FigS14 (dual-panel event studies) saved\n")
+
+# ========================================================================
 # MAIN FIGURE 5: Horse Race (standardized coefficients)
 # ========================================================================
 horse <- fread("results/tables/C4_horse_race_main.csv")
-horse[, Variable := factor(Variable, levels=rev(Variable))]
+# 按绝对量级降序(顶部=最大):Urbanization > Fertility > Governance > GDP per capita > GHE
+horse[, Variable := factor(Variable, levels=c("Fertility","GHE","GDP per capita","Governance","Urbanization"))]
 horse[, sig := ifelse(P<0.01,"p<0.01",ifelse(P<0.05,"p<0.05",ifelse(P<0.10,"p<0.10","n.s.")))]
 
 p5 <- ggplot(horse, aes(x=Coef, y=Variable)) +
@@ -231,12 +255,11 @@ p5 <- ggplot(horse, aes(x=Coef, y=Variable)) +
   geom_point(aes(color=sig), size=3.5) +
   geom_errorbarh(aes(xmin=ci_low, xmax=ci_high, color=sig), height=0.25, linewidth=1.2) +
   scale_color_manual(values=PAL_SIG) +
+  scale_x_continuous(limits=c(-0.4, 0.6), breaks=seq(-0.4, 0.6, 0.2)) +
   labs(x="Standardised coefficient (SD change in HALE per SD change in predictor)", y="",
-       title="Within-country predictors of HALE (horse-race model)",
-       subtitle="TWFE with all variables entered simultaneously; all variables z-standardised",
        color="") +
   theme_lancet
-ggsave("results/figures/C4_horse_race.pdf", p5, width=7, height=4, device=cairo_pdf)
+ggsave("results/figures/C4_horse_race.pdf", p5, width=170, height=97.1, units="mm", device=cairo_pdf)
 cat("Fig5 (horse race) saved\n")
 
 # ========================================================================
