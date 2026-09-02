@@ -1,6 +1,6 @@
 # ============================================================================
 # C3_temporal_heterogeneity.R
-# Temporal Heterogeneity: 2000-2010 vs 2011-2023
+# Temporal Heterogeneity: 2000-2015 (MDG) vs 2016-2022 (SDG)
 # MDG era vs SDG era comparison
 # ============================================================================
 
@@ -30,7 +30,7 @@ cat("C3: Temporal Heterogeneity — MDG era vs SDG era\n")
 cat("========================================================\n")
 
 # ---- Load ----
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 df[, ln_gdppc := log(gdp_per_capita_ppp)]
 
@@ -107,8 +107,8 @@ print(income_period)
 # ---- 3. Interaction Model: Period × GHE ----
 cat("\n--- 3. Interaction Model ---\n")
 
-df_a[, period_mdg := ifelse(year <= 2010, "MDG (2000-2010)", "SDG (2011-2023)")]
-df_a[, period_mdg := factor(period_mdg, levels=c("MDG (2000-2010)","SDG (2011-2023)"))]
+df_a[, period_mdg := ifelse(year <= 2015, "MDG (2000-2015)", "SDG (2016-2022)")]
+df_a[, period_mdg := factor(period_mdg, levels=c("MDG (2000-2015)","SDG (2016-2022)"))]
 
 int_fit <- feols(hale ~ ghe_share_gdp * period_mdg + ln_gdppc + urbanization + fertility_rate | iso3c + year,
                  data=df_a, vcov=~iso3c)
@@ -116,9 +116,9 @@ cat("Interaction model results:\n")
 cat(sprintf("  GHE main effect (MDG ref): %.4f (SE=%.4f)\n",
             coef(int_fit)["ghe_share_gdp"], se(int_fit)["ghe_share_gdp"]))
 cat(sprintf("  GHE × SDG interaction:    %.4f (SE=%.4f, p=%.4f)\n",
-            coef(int_fit)["ghe_share_gdp:period_mdgSDG (2011-2023)"],
-            se(int_fit)["ghe_share_gdp:period_mdgSDG (2011-2023)"],
-            pvalue(int_fit)["ghe_share_gdp:period_mdgSDG (2011-2023)"]))
+            coef(int_fit)["ghe_share_gdp:period_mdgSDG (2016-2022)"],
+            se(int_fit)["ghe_share_gdp:period_mdgSDG (2016-2022)"],
+            pvalue(int_fit)["ghe_share_gdp:period_mdgSDG (2016-2022)"]))
 
 # ---- 4. GHE Trend Changes Across Periods ----
 cat("\n--- 4. GHE Levels by Period ---\n")

@@ -18,17 +18,22 @@ dir.create("results/tables", recursive=TRUE, showWarnings=FALSE)
 dir.create("results/figures", recursive=TRUE, showWarnings=FALSE)
 
 PAL <- c(zhusha="#C23531", shiqing="#3D6BA8", yanzhi="#9D2933", dianqing="#177CB0")
-theme_pub <- theme_bw(base_size=10) +
+theme_pub <- theme_classic(base_size=7) +
   theme(panel.grid.minor=element_blank(),
-        plot.title=element_text(face="bold",size=12),
-        axis.title=element_text(size=10), axis.text=element_text(size=9))
+        panel.grid.major=element_line(colour="grey92", linewidth=0.3),
+        panel.border=element_blank(),
+        plot.title=element_text(face="bold",size=9),
+        axis.title=element_text(size=7),
+        axis.text=element_text(size=7),
+        legend.text=element_text(size=7),
+        legend.title=element_text(size=7))
 
 cat("========================================================\n")
 cat("B2: Placebo Event Study (100 iterations)\n")
 cat("========================================================\n")
 
 # ---- Load ----
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 df[, ln_gdppc := log(gdp_per_capita_ppp)]
 
@@ -130,6 +135,7 @@ cat("\n--- Placebo Results ---\n")
 
 # How many placebos produced a "significant" (p<0.05) negative coefficient at t+5?
 sig_negative_t5 <- placebo_results[beta_t5 < 0 & p_t5 < 0.05, .N]
+sig_positive_t5 <- placebo_results[beta_t5 > 0 & p_t5 < 0.05, .N]
 sig_negative_t4 <- placebo_results[beta_t4 < 0 & p_t4 < 0.05, .N]
 sig_any_negative_t5 <- placebo_results[beta_t5 < 0 & p_t5 < 0.10, .N]
 
@@ -154,22 +160,25 @@ cat("\n--- 5. Figure ---\n")
 placebo_clean <- placebo_results[!is.na(beta_t5)]
 
 p_dist <- ggplot(placebo_clean, aes(x=beta_t5)) +
-  geom_histogram(fill=PAL["shiqing"], alpha=0.6, bins=30, color="white", linewidth=0.3) +
+  geom_histogram(fill=PAL["shiqing"], alpha=0.6, bins=15, color="white", linewidth=0.3) +
   geom_vline(xintercept=real_beta_t5, color=PAL["yanzhi"], linewidth=1.2, linetype="dashed") +
   geom_vline(xintercept=0, color="grey50", linewidth=0.5) +
   annotate("text", x=real_beta_t5, y=max(ggplot2::ggplot_build(
-    ggplot(placebo_clean, aes(x=beta_t5)) + geom_histogram(bins=30)
+    ggplot(placebo_clean, aes(x=beta_t5)) + geom_histogram(bins=15)
   )$data[[1]]$count)*0.9,
            label=sprintf("Real: %.2f", real_beta_t5),
            color=PAL["yanzhi"], size=3, hjust=-0.1) +
+  scale_y_continuous(limits=c(0, max(ggplot2::ggplot_build(
+    ggplot(placebo_clean, aes(x=beta_t5)) + geom_histogram(bins=15)
+  )$data[[1]]$count)*1.25), expand=c(0,0)) +
+  scale_x_continuous(breaks=seq(-0.5, 1.0, 0.5)) +
   labs(x="Placebo t+5 Coefficient", y="Count",
-       title="Placebo Event Study — Distribution of t+5 Coefficients",
-       subtitle=sprintf("%d placebo iterations | %.1f%% produce significant negative (p<0.05)",
-                        n_iter, 100*sig_negative_t5/n_iter)) +
+       subtitle=sprintf("%d placebo iterations | significant (two-tailed p<0.05): %.1f%% negative, %.1f%% positive",
+                        n_iter, 100*sig_negative_t5/n_iter, 100*sig_positive_t5/n_iter)) +
   theme_pub
 
-ggsave("results/figures/B2_placebo_distribution.pdf", p_dist, width=7, height=5, device=cairo_pdf)
-cat("Saved: results/figures/B2_placebo_distribution.pdf\n")
+ggsave("results/figures/figS7_placebo_distribution.pdf", p_dist, width=168, height=120, units="mm", device=cairo_pdf)
+cat("Saved: results/figures/figS7_placebo_distribution.pdf\n")
 
 # P-value distribution
 p_pvals <- ggplot(placebo_clean, aes(x=p_t5)) +

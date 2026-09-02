@@ -28,7 +28,7 @@ cat("B4: Pre-COVID Only (2000-2019) — Full Model Replication\n")
 cat("========================================================\n")
 
 # ---- Load ----
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 df[, ln_gdppc := log(gdp_per_capita_ppp)]
 

@@ -23,12 +23,13 @@ theme_lancet <- theme_bw(base_size=10) + theme(
   legend.text=element_text(size=8), legend.title=element_text(size=9))
 
 # ---- Load data ----
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 df[, ln_gdppc := log(gdp_per_capita_ppp)]
 df_a <- df[!is.na(hale) & !is.na(ghe_share_gdp) & !is.na(ln_gdppc) & !is.na(urbanization) & !is.na(fertility_rate)]
 df_a[, income_base := .SD[year==min(year), income[1]], by=iso3c]
 df_low <- df_a[income_base == "Low income"]
+setorder(df_low, iso3c, year)  # chronological within country, required before shift()
 cat(sprintf("Full N=%d, Low-income N=%d, G=%d\n", nrow(df_a), nrow(df_low), uniqueN(df_low$iso3c)))
 
 # ========================================================================
@@ -68,7 +69,7 @@ p_loo <- ggplot(loo_dt, aes(x=coef, y=label)) +
   annotate("text", x=full_coef + 0.06, y=nrow(loo_dt)+0.8, 
            label=sprintf("Full LIC: +%.3f (SE=%.3f, p=%.3f)", full_coef, full_se, pvalue(fit_full)["ghe_share_gdp"]),
            size=3, color=PAL["zhusha"], hjust=0) +
-  scale_y_discrete(expand=expansion(mult=c(0, 0), add=c(0.6, 1.0))) +
+  scale_y_discrete(expand=expansion(mult=c(0, 0), add=c(0.6, 1.5))) +
   labs(x="GHE coefficient (excluded country)", y="") +
   theme_lancet
 ggsave("results/figures/figS9_lic_loo.pdf", p_loo, width=168, height=126, units="mm", device=cairo_pdf)
@@ -119,7 +120,7 @@ for(k in 0:3) {
                                     se=se(fit)[ghe_var], p=pvalue(fit)[ghe_var], N=nobs(fit))
 }
 lag_dt <- rbindlist(lag_results)
-lag_dt[, `:=`(ci_low=coef-1.96*se, ci_high=coef+1.96*se)]
+lag_dt[, `:=`(ci_low=coef-qt(0.975, 22)*se, ci_high=coef+qt(0.975, 22)*se)]  # t critical, df = G-1 = 22
 cat(sprintf("Lag0: %.4f (p=%.3f), Lag1: %.4f (p=%.3f), Lag2: %.4f (p=%.3f), Lag3: %.4f (p=%.3f)\n",
             lag_dt$coef[1], lag_dt$p[1], lag_dt$coef[2], lag_dt$p[2],
             lag_dt$coef[3], lag_dt$p[3], lag_dt$coef[4], lag_dt$p[4]))
@@ -152,7 +153,7 @@ for(k in 0:2) {
                                     se=se(fit)[hale_var], p=pvalue(fit)[hale_var])
 }
 rev_dt <- rbindlist(rev_results)
-rev_dt[, `:=`(ci_low=coef-1.96*se, ci_high=coef+1.96*se)]
+rev_dt[, `:=`(ci_low=coef-qt(0.975, 22)*se, ci_high=coef+qt(0.975, 22)*se)]  # t critical, df = G-1 = 22
 cat(sprintf("HALE→GHE: Lead0: %.4f (p=%.3f), Lead1: %.4f (p=%.3f), Lead2: %.4f (p=%.3f)\n",
             rev_dt$coef[1], rev_dt$p[1], rev_dt$coef[2], rev_dt$p[2], rev_dt$coef[3], rev_dt$p[3]))
 

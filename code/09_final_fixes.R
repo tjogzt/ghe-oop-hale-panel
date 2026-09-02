@@ -21,7 +21,7 @@ cat("SCM summary columns:", paste(names(scm), collapse=", "), "\n")
 print(scm)
 
 # Check: also compute simple TWFE DiD for comparison
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 df[, ln_gdppc := log(gdp_per_capita_ppp)]
 df_a <- df[!is.na(hale) & !is.na(ghe_share_gdp) & !is.na(ln_gdppc)]
@@ -94,6 +94,7 @@ cat("\nSaved: Table3_reforms_CORRECTED.csv\n")
 cat("\n=== E2: Austerity Correction ===\n")
 
 # Re-run B3 austerity properly
+setorder(df_a, iso3c, year)  # chronological before shift()
 df_a[, ghe_lag3 := shift(ghe_share_gdp, 3), by=iso3c]
 df_a[, ghe_chg3 := ghe_share_gdp - ghe_lag3]
 

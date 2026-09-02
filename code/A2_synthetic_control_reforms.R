@@ -27,7 +27,7 @@ theme_pub <- theme_bw(base_size=8) +
         axis.title=element_text(size=8), axis.text=element_text(size=9))
 
 # ---- Load ----
-dt <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+dt <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 dt <- dt[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 dt[, ln_gdppc := log(gdp_per_capita_ppp)]
 dt[, income_base := .SD[year==min(year), income[1]], by=iso3c]

@@ -42,6 +42,9 @@ forest <- rbind(
   main[, .(Model=Label, Coef=Coef, SE=SE, P=P)],
   income[, .(Model=paste0("  ",income_group), Coef=coef, SE=se, P=p)]
 )
+# Low-income colour: use the cluster-bootstrap p (0.065; primary inference, 23 clusters)
+# rather than the conventional clustered p (0.030), consistent with the main text.
+forest[Model=="  Low income", P := 0.065]
 forest[, `:=`(ci_low=Coef-1.96*SE, ci_high=Coef+1.96*SE)]
 forest[, sig := ifelse(P<0.01,"p<0.01",ifelse(P<0.05,"p<0.05",ifelse(P<0.10,"p<0.10","n.s.")))]
 forest[, Model := factor(Model, levels=rev(unique(Model)))]

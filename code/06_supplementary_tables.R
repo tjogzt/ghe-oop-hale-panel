@@ -12,7 +12,7 @@ setwd(PROJ)
 dir.create("results/tables/supplementary", recursive=TRUE, showWarnings=FALSE)
 
 # ---- Load Data ----
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 df[, ln_gdppc := log(gdp_per_capita_ppp)]
 df_a <- df[!is.na(hale) & !is.na(ghe_share_gdp) & !is.na(ln_gdppc)]
@@ -81,20 +81,20 @@ cor_matrix <- cor(cor_data)
 cor_dt <- as.data.table(cor_matrix, keep.rownames="Variable")
 fwrite(cor_dt, "results/tables/supplementary/Table_S3_CorrelationMatrix.csv")
 
-# ---- Table S4: Robustness from Claude pipeline ----
-cat("\n=== Table S4: Claude Robustness ===\n")
-if(file.exists("results_alt/tables/robustness_checks_summary.csv")) {
-  rob_alt <- fread("results_alt/tables/robustness_checks_summary.csv")
-  fwrite(rob_alt, "results/tables/supplementary/Table_S4_Robustness_Alt.csv")
-  cat(sprintf("Alt pipeline: %d robustness checks\n", nrow(rob_alt)))
+# ---- Table S4: Robustness from PipelineA pipeline ----
+cat("\n=== Table S4: PipelineA Robustness ===\n")
+if(file.exists("results_pipeline_a/tables/robustness_checks_summary.csv")) {
+  rob_pipeline_a <- fread("results_pipeline_a/tables/robustness_checks_summary.csv")
+  fwrite(rob_pipeline_a, "results/tables/supplementary/Table_S4_Robustness_PipelineA.csv")
+  cat(sprintf("PipelineA: %d robustness checks\n", nrow(rob_pipeline_a)))
 }
 
-# ---- Table S5: Robustness from Alt pipeline ----
-cat("\n=== Table S5: Alt Robustness ===\n")
-if(file.exists("results/panel/tables/table4_robustness_ghe.csv")) {
-  rob_alt <- fread("results/panel/tables/table4_robustness_ghe.csv")
-  fwrite(rob_alt, "results/tables/supplementary/Table_S5_Robustness_Alt.csv")
-  cat(sprintf("Alt pipeline: %d robustness checks\n", nrow(rob_alt)))
+# ---- Table S5: Robustness from PipelineB pipeline ----
+cat("\n=== Table S5: PipelineB Robustness ===\n")
+if(file.exists("results_pipeline_b/tables/table4_robustness_ghe.csv")) {
+  rob_pipeline_b <- fread("results_pipeline_b/tables/table4_robustness_ghe.csv")
+  fwrite(rob_pipeline_b, "results/tables/supplementary/Table_S5_Robustness_PipelineB.csv")
+  cat(sprintf("PipelineB: %d robustness checks\n", nrow(rob_pipeline_b)))
 }
 
 # ---- Table S6: Long Difference by Country ----
@@ -105,7 +105,7 @@ last  <- df_a[, .SD[.N], by=iso3c]
 ld <- merge(first[, .(iso3c,country,income,hale_0=hale,ghe_0=ghe_share_gdp,gdppc_0=ln_gdppc,year_0=year)],
             last[, .(iso3c,hale_T=hale,ghe_T=ghe_share_gdp,gdppc_T=ln_gdppc,year_T=year)], by="iso3c")
 ld[, `:=`(d_hale=round(hale_T-hale_0,2), d_ghe=round(ghe_T-ghe_0,2), span=year_T-year_0)]
-ld <- ld[span >= 10]
+ld <- ld[span >= 15]
 fwrite(ld[order(-d_hale)], "results/tables/supplementary/Table_S6_LongDifference.csv")
 cat(sprintf("Long-diff: %d countries\n", nrow(ld)))
 

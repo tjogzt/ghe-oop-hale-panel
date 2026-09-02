@@ -12,7 +12,7 @@ pvalue <- fixest::pvalue
 PROJ <- "/Users/taozhu/my researches/lancet_financial_v3"
 setwd(PROJ)
 
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 df[, ln_gdppc := log(gdp_per_capita_ppp)]
 df_a <- df[!is.na(hale) & !is.na(ghe_share_gdp) & !is.na(ln_gdppc)]
@@ -64,14 +64,14 @@ y <- df_low$hale
 for(b in 1:B) {
   # Generate Rademacher weights per cluster
   w <- sample(c(-1, 1), N_clust, replace=TRUE)
-  df_low[, wt := w[cluster_id]]
+  df_low_model[, wt := w[cluster_id]]
   
   # Wild bootstrap y*
-  df_low[, y_star := fitted.values(fit_low) + resid * wt]
+  df_low_model[, y_star := fitted.values(fit_low2) + resid * wt]
   
   # Re-estimate
   fit_b <- try(feols(y_star ~ ghe_share_gdp + ln_gdppc + urbanization + fertility_rate | iso3c + year,
-                     data=df_low), silent=TRUE)
+                     data=df_low_model), silent=TRUE)
   
   if(!inherits(fit_b, "try-error")) {
     beta_b <- coef(fit_b)["ghe_share_gdp"]
@@ -111,7 +111,7 @@ fwrite(data.table(
   CI_upper=c(beta_hat+1.96*se_clust, quantile(t_boot, 0.975)),
   N_clusters=c(G, G),
   N_obs=c(nrow(df_low), nrow(df_low))
-), "results/tables/E5_wild_bootstrap_lowincome.csv")
+), "results/tables/E5_manual_bootstrap.csv")
 
-cat("\nSaved: E5_wild_bootstrap_lowincome.csv\n")
+cat("\nSaved: E5_manual_bootstrap.csv\n")
 cat("=== E5 Complete ===\n")

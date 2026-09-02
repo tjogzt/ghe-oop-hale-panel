@@ -8,7 +8,7 @@ PAL_INCOME <- c("Low income"="#9D2933","Lower middle income"="#C23531",
 SHAPE_INCOME <- c("Low income"=16,"Lower middle income"=17,
                   "Upper middle income"=15,"High income"=18)
 
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 # 与 01_main_analysis.R 的 df_analysis 同口径(含 ln_gdppc 非缺失)——确保 N 与 Table 1 Model 7 一致
 df <- df[!is.na(hale) & !is.na(ghe_share_gdp) & !is.na(urbanization) & !is.na(fertility_rate) & !is.na(gdp_per_capita_ppp)]
@@ -46,7 +46,9 @@ theme_pub2 <- theme_bw(base_size=10) +
         panel.grid.major=element_line(linewidth=0.2, color="grey90"),
         axis.title=element_text(size=10), axis.text=element_text(size=8.5),
         legend.text=element_text(size=8.5), legend.title=element_text(size=9),
-        plot.margin=margin(8,8,8,8))
+        plot.margin=margin(8,8,8,8),
+        panel.border=element_blank(),               # 去矩形边框(顶/右侧随之消失)
+        axis.line=element_line(color="grey30", linewidth=0.4))  # 保留底/左轴线
 
 # ---- Panel A 带边际直方图 ----
 pa <- ggplot(ld, aes(x=d_ghe, y=d_hale)) +

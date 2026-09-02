@@ -26,8 +26,8 @@ theme_pub <- theme_bw(base_size=8) +
 
 # ---- Load & Merge ----
 cat("=== Loading Data ===\n")
-df_main <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
-df_imr  <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/raw/wb_global_health_data.csv")
+df_main <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
+df_imr  <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/raw/wb_global_health_data.csv")
 
 # Rename for clarity: SP.DYN.IMRT.IN = infant mortality (per 1000 live births)
 setnames(df_imr, "SP.DYN.IMRT.IN", "imr")

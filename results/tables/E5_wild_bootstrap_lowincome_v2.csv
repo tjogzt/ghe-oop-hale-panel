@@ -1,0 +1,3 @@
+Method,Coef,SE,p_value,CI_lower,CI_upper
+Standard clustered,0.845517993079644,0.36416310113085,0.0298950358792964,,
+"Wild cluster bootstrap (Rademacher, studentised)",0.845517993079644,0.36416310113085,0.0002000200020002,,

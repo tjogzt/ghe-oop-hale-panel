@@ -36,7 +36,7 @@ theme_pub <- theme_classic(base_size=7) +
 
 # ---- 0. Load & Prepare ----
 cat("=== Loading Data ===\n")
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 df[, ln_gdppc := log(gdp_per_capita_ppp)]
 
@@ -162,7 +162,7 @@ cat("3. Mechanism: Electricity Access\n")
 cat("========================================\n")
 
 # Load electricity data from WDI panel
-elec <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/raw/wb_wdi_panel_2000_2023.csv")
+elec <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/raw/wb_wdi_panel_2000_2023.csv")
 elec <- elec[, .(iso3c, year, electricity_use, physician_density, hospital_beds, mortality_under5)]
 elec[, year := as.numeric(year)]
 
@@ -306,6 +306,7 @@ summary_dt <- data.table(
 )
 print(summary_dt)
 fwrite(summary_dt, "results/tables/advanced_analyses_summary.csv")
+if(exists("m_pc")) cat(sprintf("Annual joint-model GDP pc coef: %.4f (SE=%.4f, p=%.4f)\n", coef(m_pc)["ln_gdppc"], se(m_pc)["ln_gdppc"], pvalue(m_pc)["ln_gdppc"]))
 cat("\nSaved: results/tables/advanced_analyses_summary.csv\n")
 
 # ========================================================================

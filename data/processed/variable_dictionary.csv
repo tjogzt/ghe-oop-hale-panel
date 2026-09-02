@@ -1,0 +1,15 @@
+variable,name,source,description
+ghe_share_gdp,Government Health Expenditure (% of GDP),World Bank WDI / WHO GHED,Domestic general government health expenditure as share of GDP
+life_expectancy,Life Expectancy at Birth,World Bank WDI / WHO GHO,Total life expectancy at birth (years)
+gdp_per_capita_ppp,GDP per Capita,World Bank WDI,"GDP per capita, constant 2017 international $"
+population,Population,World Bank WDI,Total population
+governance_composite,Governance Composite Index,WGI (Worldwide Governance Indicators),Mean of standardized governance indicators
+government_effectiveness,Government Effectiveness,WGI,"Quality of public services, civil service"
+regulatory_quality,Regulatory Quality,WGI,Ability to implement sound policies
+rule_of_law,Rule of Law,WGI,Trust in rules and contract enforcement
+control_of_corruption,Control of Corruption,WGI,Control of public power for private gain
+tax_revenue_gdp,Tax Revenue (% GDP),Fiscal Capacity Data,General government revenue as share of GDP
+government_debt_gdp,Government Debt (% GDP),Fiscal Capacity Data,General government gross debt
+urbanization,Urbanization Rate,Additional Controls / WDI,Urban population as % of total
+literacy_rate,Literacy Rate,Additional Controls,Adult literacy rate (%)
+excess_mortality,COVID Excess Mortality,OWID COVID,Excess mortality from COVID-19

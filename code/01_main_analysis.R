@@ -26,7 +26,7 @@ INC_COL <- c("Low income"="#9D2933","Lower middle income"="#C23531",
 
 # ---- 1. Load & Clean ----
 cat("\n=== 1. Loading Data ===\n")
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 cat(sprintf("Raw: %d rows, %d cols\n", nrow(df), ncol(df)))
 
 # Filter: remove aggregates and unclassified
@@ -109,7 +109,7 @@ for(ig in income_groups) {
     se_val <- se(fit)["ghe_share_gdp"]
     p_val <- pvalue(fit)["ghe_share_gdp"]
     cat(sprintf("  %-22s: GHE=%.3f (SE=%.3f, p=%.3f), N=%d\n", ig, coef_val, se_val, p_val, nrow(sub)))
-    results_list[[ig]] <- data.table(income_group=ig, coef=coef_val, se=se_val, p=p_val, n=nrow(sub))
+    results_list[[ig]] <- data.table(income_group=ig, coef=coef_val, se=se_val, p=p_val, n=nobs(fit))
   }
 }
 income_results <- rbindlist(results_list)

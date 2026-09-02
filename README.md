@@ -1,4 +1,4 @@
-# Government Health Expenditure, Out-of-Pocket Spending, and Healthy Life Expectancy in 190 Countries, 2000–2022
+# Government health expenditure was not associated with gains in healthy life expectancy in 190 countries, except in low-income settings: a panel analysis, 2000–2022
 
 [![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22031939-003399.svg)](https://doi.org/10.5281/zenodo.22031939)
 
@@ -19,12 +19,12 @@ Emails: Qingqing Mo qingqingmo520@tjh.tjmu.edu.cn; Pingbo Chen supercpb520@163.c
 
 ## Overview
 
-This repository contains the complete replication package for the manuscript *"Domestic Government Health Expenditure, Out-of-Pocket Spending, and Healthy Life Expectancy in 190 Countries, 2000–2022"* (target journal: The Lancet Global Health). All tables, figures, and statistical outputs can be reproduced from publicly available data using the scripts provided.
+This repository contains the complete replication package for the manuscript *"Government health expenditure was not associated with gains in healthy life expectancy in 190 countries, except in low-income settings: a panel analysis, 2000–2022"* (target journal: The Lancet Global Health). All tables, figures, and statistical outputs can be reproduced from publicly available data using the scripts provided.
 
 ### Key findings
 - The within-country association between domestic government health expenditure (GHE) and healthy life expectancy (HALE) is near zero overall (two-way fixed-effects β = −0.12, p = 0.077), in sharp contrast to the large positive cross-sectional association (+1.47).
-- The low-income stratum shows a positive association (β = +0.85; wild cluster bootstrap-t p = 0.065), robust to leave-one-out re-estimation (+0.66 to +1.02), concentrated in the MDG era (+1.27, p = 0.038) and attenuated to null in the SDG era (+0.03, p = 0.928).
-- GHE is associated with improved financial protection: each percentage point of GDP shifted into public financing corresponds to an ≈11% relative reduction in out-of-pocket spending (indirect effect a×b = +0.10; bootstrap 95% CI +0.02 to +0.24).
+- The low-income stratum shows a positive association (β = +0.85; clustered p = 0.030; cluster bootstrap p = 0.065, 9,999 replications), with all 23 leave-one-out estimates positive (+0.66 to +1.02), concentrated in the MDG era (+1.27, p = 0.038) and attenuated to null in the SDG era (+0.03, p = 0.928).
+- GHE is associated with improved financial protection: each percentage point of GDP shifted into public financing corresponds to an ≈11% relative reduction in out-of-pocket spending (indirect effect a×b = +0.10; cluster bootstrap 95% CI +0.02 to +0.23).
 
 ### Study design
 
@@ -36,7 +36,7 @@ Study design, sample construction (4,370 → 4,314 → 4,304 country-years; 189 
 
 ![Graphical abstract](docs/graphical_abstract.png)
 
-Visual summary of the study story: 190-country panel (2000–2022) → GHE exposure → within-country association near zero overall (TWFE β = −0.12, p = 0.077) but positive in low-income countries (β = +0.85, bootstrap-t p = 0.065) → out-of-pocket spending falls ≈11% per percentage point of GDP (indirect effect a×b = +0.10) → policy implication: public financing buys financial protection, not universal health gains.
+Visual summary of the study story: 190-country panel (2000–2022) → GHE exposure → within-country association near zero overall (TWFE β = −0.12, p = 0.077) but positive in low-income countries (β = +0.85, cluster bootstrap p = 0.065) → out-of-pocket spending falls ≈11% per percentage point of GDP (indirect effect a×b = +0.10) → policy implication: public financing buys financial protection, not universal health gains.
 
 ---
 

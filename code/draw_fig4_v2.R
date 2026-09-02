@@ -13,7 +13,7 @@ theme_pub2 <- theme_bw(base_size=10) +
         panel.border=element_blank(),
         axis.line=element_line(color="grey50", linewidth=0.3))
 
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 df <- df[income=="Low income" & !is.na(hale) & !is.na(ghe_share_gdp) & !is.na(urbanization) & !is.na(fertility_rate)]
 df[, ln_gdppc := log(gdp_per_capita_ppp)]
@@ -89,8 +89,8 @@ pd <- ggplot(rev_res, aes(x=hale_lag, y=coef)) +
        subtitle="D.  Reverse causality") +
   theme_pub2 + theme(legend.position="none")
 
-# ---- 组合:2x2 布局(A/B 上排,C/D 下排) ----
+# ---- 组合:2x2 布局(A/B 上排高,C/D 下排矮——C/D 近正方形) ----
 library(patchwork)
-p_fig4 <- (pa | pb) / (pc | pd) + plot_layout(heights=c(1, 1))
-ggsave("results/figures/fig_lic_summary_v3.pdf", p_fig4, width=170, height=215, units="mm", device=cairo_pdf)
+p_fig4 <- (pa | pb) / (pc | pd) + plot_layout(heights=c(1.35, 1))
+ggsave("results/figures/fig_lic_summary_v3.pdf", p_fig4, width=170, height=188, units="mm", device=cairo_pdf)
 cat("Saved: fig_lic_summary_v3.pdf\n")

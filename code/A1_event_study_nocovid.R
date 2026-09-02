@@ -25,7 +25,7 @@ theme_pub <- theme_bw(base_size=8) +
         axis.text=element_text(size=9))
 
 # ---- Load ----
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 df[, ln_gdppc := log(gdp_per_capita_ppp)]
 
@@ -69,6 +69,22 @@ print(es_full$coefs[order(t_rel)])
 cat("\n=== Event study: NO-COVID spikes ===\n")
 print(es_nc$coefs[order(t_rel)])
 
+# ---- Pre-trend joint tests (Wald: all pre coefficients jointly zero) ----
+pre_names <- c("t_rel_f::-4","t_rel_f::-3","t_rel_f::-2","t_rel_f::-1")
+wald_p <- function(fit, names) {
+  b <- coef(fit)[names]; V <- vcov(fit)[names, names]
+  if(any(is.na(b)) || any(is.na(V))) return(NA_real_)
+  stat <- as.numeric(t(b) %*% solve(V) %*% b)
+  k <- length(b); df <- fit$nobs - length(coef(fit))
+  pf(stat/k, k, df, lower.tail=FALSE)
+}
+p_full <- wald_p(es_full$fit, pre_names)
+p_nc   <- wald_p(es_nc$fit, pre_names)
+cat(sprintf("Pre-trend joint test (t-4..t-1 vs t-5): FULL p=%.4f | NO-COVID p=%.4f\n", p_full, p_nc))
+fwrite(data.frame(sample=c("Full (incl. COVID-era spikes)","Excl. COVID-era spikes (2020-21)"),
+                  pretrend_joint_p=round(c(p_full, p_nc), 4)),
+       "results/tables/A1_pretrend_joint.csv")
+
 # Key comparison at t+4, t+5
 for(tt in c(3,4,5)) {
   f <- es_full$coefs[t_rel==tt]; n <- es_nc$coefs[t_rel==tt]
@@ -86,29 +102,40 @@ sl[, sample := ifelse(event_year %in% 2020:2021, "Excluded (COVID-era)", "Retain
 fwrite(sl[order(event_year)], "results/tables/A1_spike_events_comparison.csv")
 
 # ---- Figure: overlay of two event studies ----
-p <- ggplot(allc, aes(x=t_rel, y=coef, color=sample, fill=sample)) +
+p <- ggplot(allc, aes(x=t_rel, y=coef, color=sample, fill=sample, linetype=sample)) +
   geom_hline(yintercept=0, linetype="dashed", color="grey50", linewidth=0.3) +
   geom_vline(xintercept=0, linetype="dashed", color=PAL["yanzhi"], linewidth=0.5) +
   geom_ribbon(aes(ymin=ci_low, ymax=ci_high), alpha=0.10, color=NA) +
-  geom_line(linewidth=0.8, position=position_dodge(width=0.15)) +
-  geom_point(size=1.8, position=position_dodge(width=0.15)) +
+  geom_line(linewidth=0.8) +
+  geom_point(size=1.8) +
   scale_color_manual(values=c("Full (incl. COVID-era spikes)"="#D55E00",
-                              "Excl. COVID-era spikes (2020-21)"="#0072B2")) +
+                              "Excl. COVID-era spikes (2020-21)"="#0072B2"),
+                      labels=c("Full sample (incl. COVID-era spikes)",
+                               "Excl. COVID-era spikes (2020–21)")) +
   scale_fill_manual(values=c("Full (incl. COVID-era spikes)"="#D55E00",
-                             "Excl. COVID-era spikes (2020-21)"="#0072B2")) +
-  labs(x="Years Relative to GHE Spike", y="HALE Change (vs t-5)",
-       title="Event Study Around GHE Spikes: Full vs COVID-Excluded Samples",
-       subtitle=sprintf("Treated (non-COVID): N=%d countries",
-                        es_nc$n_treated),
-       color="", fill="") +
-  theme_bw(base_size=10) + theme(
+                             "Excl. COVID-era spikes (2020-21)"="#0072B2"),
+                    labels=c("Full sample (incl. COVID-era spikes)",
+                             "Excl. COVID-era spikes (2020–21)")) +
+  scale_linetype_manual(values=c("Full (incl. COVID-era spikes)"="dashed",
+                                 "Excl. COVID-era spikes (2020-21)"="solid"),
+                        labels=c("Full sample (incl. COVID-era spikes)",
+                                 "Excl. COVID-era spikes (2020–21)")) +
+  scale_x_continuous(breaks=seq(-4, 9, 2)) +
+  labs(x="Years Relative to GHE Spike", y="HALE Change (vs t–5)",
+       subtitle=sprintf("Treated (non-COVID): N=%d countries", es_nc$n_treated)) +
+  theme_classic(base_size=8) + theme(
     panel.grid.minor=element_blank(),
+    panel.grid.major=element_line(colour="grey92", linewidth=0.3),
+    panel.border=element_blank(),
     legend.position="bottom",
+    legend.title=element_blank(),
+    legend.text=element_text(size=8),
+    legend.key.size=unit(0.35, "cm"),
     axis.text=element_text(size=8),
-    axis.title=element_text(size=9.5),
-    plot.title=element_text(face="bold", size=11))
+    axis.title=element_text(size=8),
+    plot.subtitle=element_text(size=8))
 
-ggsave("results/figures/figA1_event_study_nocovid.pdf", p, width=7.5, height=5, device=cairo_pdf)
+ggsave("results/figures/figA1_event_study_nocovid.pdf", p, width=168, height=110, units="mm", device=cairo_pdf)
 cat("Saved: results/figures/figA1_event_study_nocovid.pdf\n")
 
 # Distribution of spike years in retained sample

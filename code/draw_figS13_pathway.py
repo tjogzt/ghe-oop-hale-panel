@@ -47,7 +47,7 @@ ax.text(6.75, 3.75, f"b = -0{B}835*", ha="center", fontsize=10, color=ZHUSHA)
 arrow(2.2, 1.9, 7.8, 1.9, SHIQING, lw=1.6)
 ax.text(5.0, 1.55, f"c' = -0{B}222* (direct)", ha="center", fontsize=10, color=SHIQING)
 
-ax.text(5.0, 0.70, f"Total effect c = -0{B}122  (indirect a\u00d7b = +0{B}100, bootstrap 95% CI +0{B}02 to +0{B}24)",
+ax.text(5.0, 0.70, f"Total effect c = -0{B}122  (indirect a\u00d7b = +0{B}100, bootstrap 95% CI +0{B}02 to +0{B}23)",
         ha="center", fontsize=9.5, style="italic")
 ax.text(9.9, 0.25, "*p < 0.05, **p < 0.01, ***p < 0.001", ha="right", fontsize=8, color=GREY)
 

@@ -29,7 +29,7 @@ cat("C4: Horse Race — Standardized Coefficients\n")
 cat("========================================================\n")
 
 # ---- Load ----
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 df[, ln_gdppc := log(gdp_per_capita_ppp)]
 
@@ -125,13 +125,14 @@ print(hr_income)
 # ---- 6. R-squared Decomposition ----
 cat("\n--- 6. R-squared Decomposition ---\n")
 
-# Unique R2 contributions
+# Unique R2 contributions (governance-complete sample, matching the reported model)
+df_a_cc <- df_a[!is.na(governance_composite)]
 # GHE only
-r2_ghe <- feols(hale_z ~ ghe_z | iso3c + year, data=df_a, vcov=~iso3c)
+r2_ghe <- feols(hale_z ~ ghe_z | iso3c + year, data=df_a_cc, vcov=~iso3c)
 # Full
-r2_full <- feols(hale_z ~ ghe_z + gdppc_z + urban_z + fertility_z | iso3c + year, data=df_a, vcov=~iso3c)
+r2_full <- feols(hale_z ~ ghe_z + gdppc_z + urban_z + fertility_z + gov_z | iso3c + year, data=df_a_cc, vcov=~iso3c)
 # Without GHE
-r2_others <- feols(hale_z ~ gdppc_z + urban_z + fertility_z | iso3c + year, data=df_a, vcov=~iso3c)
+r2_others <- feols(hale_z ~ gdppc_z + urban_z + fertility_z + gov_z | iso3c + year, data=df_a_cc, vcov=~iso3c)
 
 cat(sprintf("Within R² (GHE only):     %.4f\n", r2(r2_ghe, "wr2")))
 cat(sprintf("Within R² (all vars):     %.4f\n", r2(r2_full, "wr2")))
@@ -170,21 +171,23 @@ p_horse <- ggplot(horse_data, aes(x=Coef, y=Variable)) +
        color="") +
   theme_pub
 
-ggsave("results/figures/C4_horse_race.pdf", p_horse, width=7, height=4, device=cairo_pdf)
-cat("Saved: results/figures/C4_horse_race.pdf\n")
+ggsave("results/figures/C4_horse_race_china_alt.pdf", p_horse, width=7, height=4, device=cairo_pdf)
+cat("Saved: results/figures/C4_horse_race_china_alt.pdf (alt; primary figure from 14_unified_figures.R)\n")
 
 # Income-stratified heat map
+hr_income[, income_group := factor(income_group, levels=c("Low income","Lower middle income","Upper middle income","High income"))]
+hr_income[, siglab := ifelse(p<0.05, paste0(sprintf("%.3f", coef), "*"),
+                      ifelse(p<0.10, paste0(sprintf("%.3f", coef), "†"), sprintf("%.3f", coef)))]
 p_income <- ggplot(hr_income, aes(x=var, y=income_group, fill=coef)) +
   geom_tile(color="white", linewidth=0.5) +
-  geom_text(aes(label=sprintf("%.3f", coef)), size=3) +
-  scale_fill_gradient2(low=PAL["zhusha"], mid="white", high=PAL["shiqing"], midpoint=0) +
-  labs(x="", y="", fill="Std. β",
-       title="Standardized Coefficients by Income Group",
-       subtitle="Within-country (TWFE) estimates for HALE") +
-  theme_pub + theme(axis.text=element_text(size=9), axis.text.x=element_text(angle=45, hjust=1))
+  geom_text(aes(label=siglab), size=3) +
+  scale_fill_gradient2(low=PAL["zhusha"], mid="white", high=PAL["shiqing"], midpoint=0,
+                       limits=c(-0.6, 0.6)) +
+  labs(x="", y="", fill="Std. β") +
+  theme_pub + theme(axis.text=element_text(size=9))
 
-ggsave("results/figures/C4_horse_race_income.pdf", p_income, width=7, height=4, device=cairo_pdf)
-cat("Saved: results/figures/C4_horse_race_income.pdf\n")
+ggsave("results/figures/figS8_income_std.pdf", p_income, width=170, height=97.1, units="mm", device=cairo_pdf)
+cat("Saved: results/figures/figS8_income_std.pdf\n")
 
 # ---- 8. Save Results ----
 fwrite(horse_data, "results/tables/C4_horse_race_main.csv")

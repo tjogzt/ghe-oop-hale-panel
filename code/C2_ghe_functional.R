@@ -29,7 +29,7 @@ cat("========================================================\n")
 cat("C2: GHE Functional Classification\n")
 cat("========================================================\n")
 
-DATA_DIR <- "/Volumes/tjogzt4T/lancet_financial_v2/data/raw"
+DATA_DIR <- "/Users/taozhu/my researches/lancet_financial_v3/data/raw"
 
 # ---- 1. Check WHO GHED Data ----
 cat("\n--- 1. WHO GHED Data ---\n")
@@ -73,7 +73,7 @@ if(file.exists(wdi_panel_path)) {
 # ---- 3. GHE Composition Analysis ----
 cat("\n--- 3. GHE Summary Statistics ---\n")
 
-df <- fread("/Volumes/tjogzt4T/lancet_financial_v2/data/processed/integrated_panel_final.csv")
+df <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
 df <- df[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 df[, ln_gdppc := log(gdp_per_capita_ppp)]
 df[, income_base := .SD[year==min(year), income[1]], by=iso3c]

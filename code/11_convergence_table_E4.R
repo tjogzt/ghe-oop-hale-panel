@@ -7,8 +7,8 @@ PROJ <- "/Users/taozhu/my researches/lancet_financial_v3"
 setwd(PROJ)
 
 # Read key results from all three pipelines
-# Pipeline A (alternative replication) (code_alt/)
-# Pipeline B: independent replication pipeline
+# Pipeline A: PipelineA (code_pipeline_a/)
+# Pipeline B: PipelineB (code_pipeline_b/)
 # Pipeline C: Coordinator (our main results)
 
 cat("=== E4: Three-Pipeline Convergence Table ===\n")
@@ -17,12 +17,12 @@ cat("=== E4: Three-Pipeline Convergence Table ===\n")
 coord_main <- fread("results/tables/main_results.csv")
 coord_income <- fread("results/tables/income_heterogeneity.csv")
 
-# Claude results (from original pipeline)
-alt_main <- fread("results_alt/tables/all_estimates_summary.csv")
-alt_income <- fread("results_alt/tables/subgroup_by_income.csv")
+# PipelineA results (from original pipeline)
+pipeline_a_main <- fread("results_pipeline_a/tables/all_estimates_summary.csv")
+pipeline_a_income <- fread("results_pipeline_a/tables/subgroup_by_income.csv")
 
-# Alt results (from original pipeline)
-alt_main <- fread("results/panel/tables/table5_key_estimates.csv")
+# PipelineB results (from original pipeline)
+pipeline_b_main <- fread("results_pipeline_b/tables/table5_key_estimates.csv")
 
 # Build convergence table
 conv <- data.table(
@@ -48,22 +48,22 @@ conv <- data.table(
     coord_income[income_group=="Upper middle income", sprintf("%.3f (p=%.3f)", coef, p)],
     coord_income[income_group=="High income", sprintf("%.3f (p=%.3f)", coef, p)]
   ),
-  Claude = c(
-    alt_main[Model=="M1_Pooled_OLS", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
-    alt_main[Model=="M2_TWFE_IMP", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
+  PipelineA = c(
+    pipeline_a_main[Model=="M1_Pooled_OLS", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
+    pipeline_a_main[Model=="M2_TWFE_IMP", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
     "—",
     "—",
     "—",
-    alt_income[Model=="Subgroup_Low", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
-    alt_income[Model=="Subgroup_Lower-middle", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
-    alt_income[Model=="Subgroup_Upper-middle", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
-    alt_income[Model=="Subgroup_High", sprintf("%.3f (p=%.3f)", Coefficient, p_value)]
+    pipeline_a_income[Model=="Subgroup_Low", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
+    pipeline_a_income[Model=="Subgroup_Lower-middle", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
+    pipeline_a_income[Model=="Subgroup_Upper-middle", sprintf("%.3f (p=%.3f)", Coefficient, p_value)],
+    pipeline_a_income[Model=="Subgroup_High", sprintf("%.3f (p=%.3f)", Coefficient, p_value)]
   ),
-  Alt = c(
-    alt_main[model=="OLS_3_full_controls", sprintf("%.3f (p=%.3f)", estimate, p_value)],
-    alt_main[model=="TWFE_3_full_controls", sprintf("%.3f (p=%.3f)", estimate, p_value)],
+  PipelineB = c(
+    pipeline_b_main[model=="OLS_3_full_controls", sprintf("%.3f (p=%.3f)", estimate, p_value)],
+    pipeline_b_main[model=="TWFE_3_full_controls", sprintf("%.3f (p=%.3f)", estimate, p_value)],
     "—",
-    alt_main[model=="LongDiff_2000_latest", sprintf("%.3f (p=%.3f)", estimate, p_value)],
+    pipeline_b_main[model=="LongDiff_2000_latest", sprintf("%.3f (p=%.3f)", estimate, p_value)],
     "—",
     "—",
     "—",
