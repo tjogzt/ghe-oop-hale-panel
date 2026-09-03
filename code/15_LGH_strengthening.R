@@ -89,12 +89,18 @@ cat(sprintf("Quadratic: linear=%.4f (p=%.3f), squared=%.4f (p=%.3f)\n",
             coef(fit_quad)["ghe_sq"], pvalue(fit_quad)["ghe_sq"]))
 
 # Predicted values for visualization
-ghe_seq <- seq(min(df_low$ghe_share_gdp, na.rm=TRUE), max(df_low$ghe_share_gdp, na.rm=TRUE), length.out=50)
-# Use a simpler scatter + loess approach for visualization
+# Predicted values from the TWFE quadratic model (same as Figure 4B)
+grid_x <- seq(0, 3.5, length.out=100)
+b_q <- coef(fit_quad)
+pred_q <- b_q["ln_gdppc"]*mean(df_low$ln_gdppc, na.rm=TRUE) +
+  b_q["urbanization"]*mean(df_low$urbanization, na.rm=TRUE) +
+  b_q["fertility_rate"]*mean(df_low$fertility_rate, na.rm=TRUE) +
+  grid_x*b_q["ghe_share_gdp"] + grid_x^2*b_q["ghe_sq"] +
+  mean(fit_quad$sumFE)
+dose_dt <- data.table(ghe=grid_x, hale=pred_q)
 p_dose <- ggplot(df_low, aes(x=ghe_share_gdp, y=hale)) +
-  geom_point(alpha=0.3, size=1.5, color="grey60") +
-  geom_smooth(method="lm", formula=y~x+I(x^2), se=TRUE,
-              fill=PAL["shiqing"], alpha=0.15, color=PAL["shiqing"], linewidth=1) +
+  geom_point(alpha=0.25, size=1.2, color="grey60") +
+  geom_line(data=dose_dt, aes(x=ghe, y=hale), color=PAL["shiqing"], linewidth=1.2) +
   labs(x="GHE (% GDP)", y="HALE (years)") +
   theme_lancet
 ggsave("results/figures/figS10_lic_doseresponse.pdf", p_dose, width=170, height=121.4, units="mm", device=cairo_pdf)
@@ -125,13 +131,13 @@ cat(sprintf("Lag0: %.4f (p=%.3f), Lag1: %.4f (p=%.3f), Lag2: %.4f (p=%.3f), Lag3
             lag_dt$coef[1], lag_dt$p[1], lag_dt$coef[2], lag_dt$p[2],
             lag_dt$coef[3], lag_dt$p[3], lag_dt$coef[4], lag_dt$p[4]))
 
-p_lag <- ggplot(lag_dt, aes(x=lag, y=coef)) +
-  geom_hline(yintercept=0, linetype="dashed", color="grey50", linewidth=0.3) +
-  geom_ribbon(aes(ymin=ci_low, ymax=ci_high), fill=PAL["shiqing"], alpha=0.15) +
-  geom_line(color=PAL["shiqing"], linewidth=0.9) +
-  geom_point(size=3, color=PAL["shiqing"]) +
-  scale_x_reverse(breaks=0:3, labels=c("t","t-1","t-2","t-3")) +
-  labs(x="GHE lag (years)", y="GHE coefficient (HALE yrs per %GDP)") +
+lag_lab <- c("t (contemporaneous)", "t-1", "t-2", "t-3")
+lag_dt[, lag_lab := factor(lag_lab, levels=rev(lag_lab))]
+p_lag <- ggplot(lag_dt, aes(x=coef, y=lag_lab)) +
+  geom_vline(xintercept=0, linetype="dashed", color="grey50", linewidth=0.3) +
+  geom_errorbarh(aes(xmin=ci_low, xmax=ci_high), height=0.25, color="grey45", linewidth=0.8) +
+  geom_point(color=PAL["dianqing"], size=2.8) +
+  labs(x="GHE coefficient (HALE yrs per %GDP)", y="", subtitle="Lag structure (G = 23 LICs)") +
   theme_lancet
 ggsave("results/figures/figS11_lic_lagstructure.pdf", p_lag, width=168, height=126, units="mm", device=cairo_pdf)
 fwrite(lag_dt, "results/tables/LGH3_lagstructure.csv")
@@ -171,7 +177,7 @@ p_rev <- ggplot(rev_dt, aes(x=hale_lag, y=coef)) +
   geom_hline(yintercept=0, linetype="dashed", color="grey50", linewidth=0.3) +
   geom_ribbon(aes(ymin=ci_low, ymax=ci_high), fill=PAL["zhusha"], alpha=0.15) +
   geom_line(color=PAL["zhusha"], linewidth=0.9) +
-  geom_point(size=3, color=PAL["zhusha"]) +
+  geom_point(size=2.8, color=PAL["zhusha"]) +
   scale_x_reverse(breaks=0:2, labels=c("t","t-1","t-2")) +
   labs(x="HALE lag (years)", y="Coefficient (GHE %GDP per HALE year)") +
   theme_lancet
