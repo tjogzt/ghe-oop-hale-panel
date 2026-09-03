@@ -1,6 +1,6 @@
 # Government health expenditure was not associated with gains in healthy life expectancy in 190 countries, except in low-income settings: a panel analysis, 2000–2022
 
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22260558-003399.svg)](https://doi.org/10.5281/zenodo.22260558)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22278049-003399.svg)](https://doi.org/10.5281/zenodo.22278049)
 
 [English](README.md) | [简体中文](README_zh.md)
 
