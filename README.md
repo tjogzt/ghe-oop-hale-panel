@@ -28,7 +28,7 @@ This repository contains the complete replication package for the manuscript *"G
 
 ### Study design
 
-![Study design and analysis framework](docs/study_design_flow.png)
+![Figure 1. Study design, analysis framework, and key estimates](docs/figure1_latest.png)
 
 Study design, sample construction (4,370 → 4,314 → 4,304 country-years; 189 countries), and analytical framework (primary TWFE, event studies, synthetic control, OOP pathway decomposition, low-income bootstrap robustness, income-group and era heterogeneity).
 
