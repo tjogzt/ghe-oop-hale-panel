@@ -61,6 +61,7 @@ ghe-oop-hale-panel/
 - **数据来源**（均为公开数据）：GBD 2023 Results Tool（HALE）、World Bank WDI API（GHE/GDP/OOP/协变量）、WGI 2025（治理）、IMF GFS（税收）
 - **管线顺序**：01 → 02 → … → 15，随后 A1–C4 补充脚本
 - 图为单panel PDF（`results/figures/`）；表为CSV（`results/tables/`）。
+- 全部图的PNG预览版在 `results/figures/png/`（GitHub 界面可直接在线查看）。
 
 ## 许可
 

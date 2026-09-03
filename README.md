@@ -61,6 +61,7 @@ ghe-oop-hale-panel/
 - **Data sources** (all public): GBD 2023 Results Tool (HALE), World Bank WDI API (GHE, GDP, OOP, covariates), WGI 2025 (governance), IMF GFS (tax revenue).
 - **Pipeline order**: 01 → 02 → … → 15, then A1–C4 supplementary scripts.
 - Figures are single-panel PDFs in `results/figures/`; tables as CSV in `results/tables/`.
+- PNG previews of all figures are in `results/figures/png/` (viewable directly in the GitHub interface).
 
 ## License
 
