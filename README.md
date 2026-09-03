@@ -32,12 +32,6 @@ This repository contains the complete replication package for the manuscript *"G
 
 Study design, sample construction (4,370 → 4,314 → 4,304 country-years; 189 countries), and analytical framework (primary TWFE, event studies, synthetic control, OOP pathway decomposition, low-income bootstrap robustness, income-group and era heterogeneity).
 
-### Graphical abstract
-
-![Graphical abstract](docs/graphical_abstract.png)
-
-Visual summary of the study story: 190-country panel (2000–2022) → GHE exposure → within-country association near zero overall (TWFE β = −0.12, p = 0.077) but positive in low-income countries (β = +0.85, cluster bootstrap p = 0.065) → out-of-pocket spending falls ≈11% per percentage point of GDP (indirect effect a×b = +0.10) → policy implication: public financing buys financial protection, not universal health gains.
-
 ---
 
 ## Repository Structure
