@@ -1,6 +1,6 @@
 Metric,Value
-n_austerity_countries,21
-n_austerity_events,21
-did_coef,-0.838858408427598
-did_se,0.327362170630737
-did_p,0.0111758939509185
+n_austerity_countries,27
+n_austerity_events,27
+did_coef,-0.784716585461595
+did_se,0.299494079795936
+did_p,0.00950371497972462

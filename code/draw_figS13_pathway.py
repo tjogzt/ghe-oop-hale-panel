@@ -52,6 +52,6 @@ ax.text(5.0, 0.70, f"Total effect c = -0{B}122  (indirect a\u00d7b = +0{B}100, b
 ax.text(9.9, 0.25, "*p < 0.05, **p < 0.01, ***p < 0.001", ha="right", fontsize=8, color=GREY)
 
 plt.tight_layout(pad=0.3)
-plt.savefig("/Users/taozhu/my researches/lancet_financial_v3/results/figures/figS13_oop_pathway.pdf",
+plt.savefig("/Users/taozhu/my researches/lancet_financial_v3/results/figures/figS9_oop_pathway.pdf",
             format="pdf")
-print("Saved: figS13_oop_pathway.pdf (v2)")
+print("Saved: figS9_oop_pathway.pdf (v2)")

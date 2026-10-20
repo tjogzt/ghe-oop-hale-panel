@@ -1,0 +1,16 @@
+var,n_missing,pct,value
+hale,391,7.62,
+ghe_share_gdp,602,11.73,
+ln_gdppc,149,2.9,
+urbanization,0,0,
+fertility_rate,0,0,
+oop_expenditure,602,11.73,
+excl_high_income,506,80.2,
+excl_low_income,72,11.4,
+excl_upper_middle_income,40,6.3,
+excl_lower_middle_income,13,2.1,
+cc_beta,,,-0.147581084501541
+cc_p,,,0.030423738015941
+mi_beta,,,-0.0742404961237188
+mi_se,,,0.0432317312399122
+mi_p,,,0.0859300999418515

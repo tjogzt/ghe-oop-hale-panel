@@ -81,20 +81,20 @@ cor_matrix <- cor(cor_data)
 cor_dt <- as.data.table(cor_matrix, keep.rownames="Variable")
 fwrite(cor_dt, "results/tables/supplementary/Table_S3_CorrelationMatrix.csv")
 
-# ---- Table S4: Robustness from PipelineA pipeline ----
-cat("\n=== Table S4: PipelineA Robustness ===\n")
+# ---- Table S4: Robustness from Pipeline A pipeline ----
+cat("\n=== Table S4: Pipeline A Robustness ===\n")
 if(file.exists("results_pipeline_a/tables/robustness_checks_summary.csv")) {
   rob_pipeline_a <- fread("results_pipeline_a/tables/robustness_checks_summary.csv")
   fwrite(rob_pipeline_a, "results/tables/supplementary/Table_S4_Robustness_PipelineA.csv")
-  cat(sprintf("PipelineA: %d robustness checks\n", nrow(rob_pipeline_a)))
+  cat(sprintf("Pipeline A: %d robustness checks\n", nrow(rob_pipeline_a)))
 }
 
-# ---- Table S5: Robustness from PipelineB pipeline ----
-cat("\n=== Table S5: PipelineB Robustness ===\n")
+# ---- Table S5: Robustness from Pipeline B pipeline ----
+cat("\n=== Table S5: Pipeline B Robustness ===\n")
 if(file.exists("results_pipeline_b/tables/table4_robustness_ghe.csv")) {
   rob_pipeline_b <- fread("results_pipeline_b/tables/table4_robustness_ghe.csv")
   fwrite(rob_pipeline_b, "results/tables/supplementary/Table_S5_Robustness_PipelineB.csv")
-  cat(sprintf("PipelineB: %d robustness checks\n", nrow(rob_pipeline_b)))
+  cat(sprintf("Pipeline B: %d robustness checks\n", nrow(rob_pipeline_b)))
 }
 
 # ---- Table S6: Long Difference by Country ----

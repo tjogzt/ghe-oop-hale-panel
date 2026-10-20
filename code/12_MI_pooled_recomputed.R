@@ -18,7 +18,8 @@ df[, income_base := .SD[year==min(year), income[1]], by=iso3c]
 all_model_vars <- c("hale","ghe_share_gdp","ln_gdp_pc","urbanization","fertility_rate",
                     "governance_composite","oop_expenditure","tax_revenue_gdp","government_effectiveness")
 miss <- sapply(df[, ..all_model_vars], function(x) mean(is.na(x)))
-impute_vars <- names(miss[miss > 0 & miss < 0.4])
+impute_vars <- unique(c(names(miss[miss > 0 & miss < 0.4]),
+                      "hale","ghe_share_gdp","ln_gdp_pc","urbanization","fertility_rate"))
 
 set.seed(49)
 imp <- mice(df[, c("iso3c","year", impute_vars), with=FALSE], m=20, maxit=20, method="pmm", printFlag=FALSE)

@@ -27,16 +27,23 @@ loo_res[, country := fcase(
   iso3c=="AFG","Afghanistan",iso3c=="GNB","Guinea-Bissau",iso3c=="MLI","Mali",iso3c=="NER","Niger",
   iso3c=="TGO","Togo",iso3c=="CAF","Central African Republic",iso3c=="LBR","Liberia",iso3c=="ETH","Ethiopia",
   iso3c=="UGA","Uganda",iso3c=="SDN","Sudan",iso3c=="GMB","Gambia",default=iso3c)]
+# 2026-10-20: 动态读取主 LIC 系数与簇数(避免硬编码过时)
+lic_main <- tryCatch({
+  tb <- fread("results/tables/E5_wild_bootstrap_lowincome.csv")
+  as.numeric(tb[Method == "Standard clustered", Coef][1])
+}, error = function(e) NA_real_)
+G_lic <- uniqueN(loo_res$iso3c)
+lic_lab <- ifelse(is.na(lic_main), "Full LIC", sprintf("Full LIC: +%.3f", lic_main))
 setorderv(loo_res, "coef")
 loo_res[, country := factor(country, levels=rev(country))]
 pa <- ggplot(loo_res, aes(x=coef, y=country)) +
-  geom_vline(xintercept=0.846, linetype="dashed", color=PAL["zhusha"], linewidth=0.5) +
+  geom_vline(xintercept=lic_main, linetype="dashed", color=PAL["zhusha"], linewidth=0.5) +
   geom_errorbarh(aes(xmin=ci_low, xmax=ci_high), height=0.3, color="grey45", linewidth=0.8) +
   geom_point(color=PAL["shiqing"], size=2.4) +
   scale_y_discrete(expand = expansion(add = c(0.4, 1.5))) +  # 顶部多留 1.5 单元——红字完整显示
-  annotate("text", x=0.1, y=nrow(loo_res)+0.9, label="Full LIC: +0.846",
+  annotate("text", x=0.1, y=nrow(loo_res)+0.9, label=lic_lab,
            color=PAL["zhusha"], size=3.5, hjust=0, fontface="bold") +
-  labs(x="GHE coefficient (HALE yrs per %GDP)", y="", subtitle="A.  Leave-one-out (23 LICs)") +
+  labs(x="GHE coefficient (HALE yrs per %GDP)", y="", subtitle=sprintf("A.  Leave-one-out (%d LICs)", G_lic)) +
   theme_pub2 +
   theme(axis.text.y=element_text(size=8.5, margin=margin(r=2)),
         plot.margin=margin(6,6,6,6))
@@ -71,7 +78,7 @@ pc <- ggplot(lag_res, aes(x=coef, y=lag_lab)) +
   geom_errorbarh(aes(xmin=ci_low, xmax=ci_high), height=0.25, color="grey45", linewidth=0.8) +
   geom_point(color=PAL["dianqing"], size=2.8) +
   labs(x="GHE coefficient (HALE yrs per %GDP)", y="",
-       subtitle="C.  Lag structure (G = 23 LICs)") +
+       subtitle=sprintf("C.  Lag structure (G = %d LICs)", G_lic)) +
   theme_pub2
 
 # ---- Panel D: reverse causality ----
@@ -92,5 +99,5 @@ pd <- ggplot(rev_res, aes(x=hale_lag, y=coef)) +
 # ---- 组合:2x2 布局(A/B 上排高,C/D 下排矮——C/D 近正方形) ----
 library(patchwork)
 p_fig4 <- (pa | pb) / (pc | pd) + plot_layout(heights=c(1.35, 1))
-ggsave("results/figures/fig_lic_summary_v3.pdf", p_fig4, width=170, height=188, units="mm", device=cairo_pdf)
-cat("Saved: fig_lic_summary_v3.pdf\n")
+ggsave("results/figures/fig4_lic_summary.pdf", p_fig4, width=170, height=188, units="mm", device=cairo_pdf)
+cat("Saved: fig4_lic_summary.pdf\n")

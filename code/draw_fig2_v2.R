@@ -83,7 +83,7 @@ pc <- ggplot(resid_data, aes(x=ghe_r, y=hale_r)) +
   geom_smooth(method="lm", se=TRUE, color="grey30", linewidth=0.8, alpha=0.15, fill="grey70") +
   labs(x="Residualised within-country\nGHE deviation (pp GDP)",
        y="Residualised within-country\nHALE deviation (years)",
-       subtitle="C.  Within-country:  partial r = -0.07") +
+       subtitle=sprintf("C.  Within-country:  partial r = %.2f", rC)) +
   theme_pub2 + theme(legend.position="none")
 
 # ---- 组合:2 行 2 列(A 独占第一行,B/C 并排第二行) ----

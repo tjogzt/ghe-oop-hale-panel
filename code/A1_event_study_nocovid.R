@@ -135,8 +135,8 @@ p <- ggplot(allc, aes(x=t_rel, y=coef, color=sample, fill=sample, linetype=sampl
     axis.title=element_text(size=8),
     plot.subtitle=element_text(size=8))
 
-ggsave("results/figures/figA1_event_study_nocovid.pdf", p, width=168, height=110, units="mm", device=cairo_pdf)
-cat("Saved: results/figures/figA1_event_study_nocovid.pdf\n")
+ggsave("results/figures/figS2_event_study_nocovid.pdf", p, width=168, height=110, units="mm", device=cairo_pdf)
+cat("Saved: results/figures/figS2_event_study_nocovid.pdf\n")
 
 # Distribution of spike years in retained sample
 cat("\nRetained spike years:\n"); print(table(spike_nc$event_year))

@@ -1,8 +1,11 @@
 iso3c,event_year,country,income
+CAN,2023,Canada,High income
 CUB,2012,Cuba,Upper middle income
 DZA,2022,Algeria,Upper middle income
 GRC,2014,Greece,High income
+GUY,2023,Guyana,High income
 IRL,2015,Ireland,High income
+IRN,2020,"Iran, Islamic Rep.",Upper middle income
 IRQ,2012,Iraq,Upper middle income
 KGZ,2015,Kyrgyz Republic,Lower middle income
 KIR,2007,Kiribati,Lower middle income
@@ -15,8 +18,11 @@ MHL,2005,Marshall Islands,Upper middle income
 MNG,2003,Mongolia,Upper middle income
 NOR,2022,Norway,High income
 NRU,2003,Nauru,High income
+OMN,2023,Oman,High income
 SLB,2008,Solomon Islands,Lower middle income
+SMR,2023,San Marino,High income
 STP,2006,Sao Tome and Principe,Lower middle income
 SUR,2022,Suriname,Upper middle income
 TUV,2003,Tuvalu,Upper middle income
+USA,2023,United States,High income
 VUT,2014,Vanuatu,Lower middle income

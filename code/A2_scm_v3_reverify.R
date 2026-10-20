@@ -26,9 +26,12 @@ theme_pub <- theme_bw(base_size=8) +
         axis.title=element_text(size=8), axis.text=element_text(size=7))
 
 # ---- Load ----
-dt <- as.data.table(readRDS("results_pipeline_b/panel_analysis.rds"))
+# 2026-10-20: 改为读 2000-2023 新面板(原 results_pipeline_b/panel_analysis.rds 为 8 月旧版)
+dt <- fread("/Users/taozhu/my researches/lancet_financial_v3/data/processed/integrated_panel_final.csv")
+dt <- dt[!(region %in% c("Aggregates","") | income %in% c("Aggregates","Not classified",""))]
 dt[, ln_gdppc := log(gdp_per_capita_ppp)]
-dt[, income_base := as.character(income_base)]
+setorder(dt, iso3c, year)
+dt[, income_base := as.character(.SD[1, income]), by = iso3c]
 dt[, region := NULL]
 
 reforms <- data.table(
@@ -41,7 +44,7 @@ reforms <- data.table(
 run_scm <- function(iso, ryear, label) {
   ig <- unique(dt[iso3c==iso, income_base])
   pre_years <- 2000:(ryear-1)          # full available pre-period (data start 2000)
-  end_year  <- min(ryear + 15, 2022)   # post window capped at data end
+  end_year  <- min(ryear + 15, 2023)   # post window capped at data end (2023 refresh)
   win_years <- c(pre_years, ryear:end_year)
 
   pool <- dt[income_base==ig & iso3c!=iso & !(iso3c %in% reforms$iso3c)]

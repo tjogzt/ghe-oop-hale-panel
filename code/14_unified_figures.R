@@ -239,7 +239,7 @@ p_s14 <- ggplot(mirror_data, aes(x=t_rel, y=coef, color=type, fill=type)) +
   scale_x_continuous(breaks=seq(-5, 10, 2)) +
   labs(x="Years since event", y="HALE change (years)") +
   theme_lancet + theme(legend.position="none")
-ggsave("results/figures/figS14_event_austerity.pdf", p_s14, width=170, height=80, units="mm", device=cairo_pdf)
+ggsave("results/figures/figS10_event_austerity.pdf", p_s14, width=170, height=80, units="mm", device=cairo_pdf)
 cat("FigS14 (dual-panel event studies) saved\n")
 
 # ========================================================================

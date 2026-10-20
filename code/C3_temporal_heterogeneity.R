@@ -1,6 +1,6 @@
 # ============================================================================
 # C3_temporal_heterogeneity.R
-# Temporal Heterogeneity: 2000-2015 (MDG) vs 2016-2022 (SDG)
+# Temporal Heterogeneity: 2000-2015 (MDG) vs 2016-2023 (SDG)
 # MDG era vs SDG era comparison
 # ============================================================================
 
@@ -38,11 +38,11 @@ df_a <- df[!is.na(hale) & !is.na(ghe_share_gdp) & !is.na(ln_gdppc)]
 df_a[, income_base := .SD[year==min(year), income[1]], by=iso3c]
 
 # ---- 1. Split into Periods ----
-# MDG era: 2000-2015 | SDG era: 2016-2022 (panel ends 2022)
-# Era definitions updated 2026-08-19 to match 2022 panel truncation
+# MDG era: 2000-2015 | SDG era: 2016-2023 (panel now ends 2023)
+# Era definitions updated 2026-10-20 to match the 2000-2023 panel
 periods <- list(
   "2000–2015 (MDG)" = c(2000, 2015),
-  "2016–2022 (SDG)" = c(2016, 2022)
+  "2016–2023 (SDG)" = c(2016, 2023)
 )
 
 results_period <- data.table()

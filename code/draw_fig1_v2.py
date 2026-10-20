@@ -71,9 +71,9 @@ arrow(9.0, 8.75, 9.0, 8.45)
 
 # Panel construction(两行,加高)
 box(0.4, 6.8, 17.2, 1.6, fc=FILL_A, ec=ZHUSHA, lw=1.2)
-txt(9.0, 8.1, "Panel construction:  190 countries × 23 years (2000-2022) = 4,370 country-years", fs=9.5, bold=True)
-txt(9.0, 7.6, "Sample flow:  exclude aggregate entities  →  4,304 complete-case country-years", fs=9)
-txt(9.0, 7.23, "(189 countries; Somalia excluded)  →  +governance controls 4,098  →  non-missing tax revenue (IV-2SLS) 2,753", fs=9)
+txt(9.0, 8.1, "Panel construction:  190 countries × 24 years (2000-2023) = 4,560 country-years", fs=9.5, bold=True)
+txt(9.0, 7.6, "Sample flow:  exclude aggregate entities  →  4,499 complete-case country-years", fs=9)
+txt(9.0, 7.23, "(190 countries)  →  +governance controls 4,292  →  non-missing tax revenue (IV-2SLS) 2,869", fs=9)
 # Panel → 分析框架 向下箭头
 arrow(9.0, 6.8, 9.0, 6.2)
 
@@ -81,14 +81,14 @@ arrow(9.0, 6.8, 9.0, 6.2)
 sect_title(0.4, 6.5, "B.  Analytical framework")
 # 列宽按内容:Primary 3.6 / Triangulation 4.3 / Low-income 4.3 / Policy 4.6(右缘 18.0)
 cols = [
-    ("Primary", 0.3, 3.6, ["Pooled OLS (descriptive)", "Country FE",
-                      "TWFE  β = -0.12 (p = 0.077)", "Long-difference"]),
-    ("Triangulation", 4.2, 4.3, ["Event study (GHE spikes, ref k = -5)", "Synthetic control (6 reforms)",
-                            "OOP pathway decomposition", "Temporal aggregation (5/10-yr)"]),
-    ("Low-income deepening", 8.8, 4.3, ["Wild cluster bootstrap (G = 23)", "Leave-one-out",
-                                   "Dose-response & lag structure", "Reverse-causality check"]),
-    ("Policy & heterogeneity", 13.4, 4.6, ["Income groups (LIC/LMIC/UMIC/HIC)", "Population-weighted TWFE",
-                                      "MDG (2000-15) vs SDG (2016-22)", "Exclusion bounds (+0.10/+0.20)"]),
+    ("Primary", 0.3, 3.6, ["Pooled OLS", "Country FE",
+                      "TWFE β = -0.15", "Long-difference"]),
+    ("Triangulation", 4.2, 4.3, ["Event study (spikes)", "Synthetic control",
+                            "OOP pathway", "Temporal agg. (5/10-yr)"]),
+    ("Low-income deepening", 8.8, 4.3, ["Wild bootstrap (G=24)", "Leave-one-out",
+                                   "Dose-response", "Reverse-causality"]),
+    ("Policy & heterogeneity", 13.4, 4.6, ["Income groups", "Population-weighted",
+                                      "MDG vs SDG eras", "Exclusion bounds"]),
 ]
 for i_col, (name, x, w, items) in enumerate(cols):
     fc = [FILL_B, FILL_C, FILL_A, FILL_D][i_col]
@@ -96,14 +96,16 @@ for i_col, (name, x, w, items) in enumerate(cols):
     box(x, 3.3, w, 2.9, fc=fc, ec=ec, lw=1.4)
     txt(x+w/2, 5.85, name, fs=9.5, bold=True)
     for i, it in enumerate(items):
-        txt(x+w/2, 5.3 - i*0.62, it, fs=8.5)
+        txt(x+w/2, 5.3 - i*0.62, it, fs=8.0)
 arrow(9.0, 3.3, 9.0, 2.5)
 
 # ===== Key findings =====
-box(0.4, 0.5, 17.5, 1.7, fc=FILL_K, ec=GREY_D, lw=1.2)
-txt(9.0, 1.7, "Key findings:", fs=9.5, bold=True)
-txt(9.0, 1.25, "LIC  $\\beta$ = +0.85 (bootstrap-t p = 0.065)   |   OOP down 11% per pp GHE (path a $\\beta$ = -0.120)   |   TWFE $\\beta$ = -0.12 (p = 0.077)",
-    fs=9.5, bold=True)
+box(0.4, 0.35, 17.5, 1.95, fc=FILL_K, ec=GREY_D, lw=1.2)
+txt(9.0, 1.95, "Key findings:", fs=9.5, bold=True)
+txt(9.0, 1.35, "TWFE $\\beta$ = -0.15 (p = 0.030);  -0.04 (p = 0.351) with country-specific trends",
+    fs=9.0, bold=True)
+txt(9.0, 0.85, "LIC $\\beta$ = +0.81 (bootstrap-t p = 0.065)   |   OOP down 13% per pp GHE (path a $\\beta$ = -0.143)",
+    fs=9.0, bold=True)
 
 plt.tight_layout(pad=0.3)
 plt.savefig("/Users/taozhu/my researches/lancet_financial_v3/results/figures/fig0_study_design_v2.pdf", format="pdf")

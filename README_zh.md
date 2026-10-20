@@ -1,68 +1,90 @@
-# 政府卫生支出、自付医疗支出与健康预期寿命：190个国家2000–2022年面板分析
+# 190 个国家政府卫生支出与健康预期寿命：2000–2023 年组间–组内面板分析
 
-[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22278049-003399.svg)](https://doi.org/10.5281/zenodo.22278049)
+[![DOI](https://img.shields.io/badge/DOI-10.5281%2Fzenodo.22028176-003399.svg)](https://doi.org/10.5281/zenodo.22028176)
 
 [English](README.md) | [简体中文](README_zh.md)
 
-## 全球国家-年份面板研究
+## 全球国家–年份面板分析
 
 ### 作者
-墨青青¹²、陈平波¹²、徐成¹²、王亚¹²、胡婷¹²、孙茜¹²、朱涛¹²✉
+莫青青¹²、陈平波¹²、徐诚¹²、王雅¹²、胡婷¹²、孙倩¹²、朱涛¹²✉
 
-¹ 华中科技大学同济医学院附属同济医院妇产科，国家妇产疾病临床医学研究中心，武汉
-² 教育部肿瘤侵袭转移重点实验室，华中科技大学同济医学院附属同济医院，武汉
+¹ 华中科技大学同济医学院附属同济医院妇产科、国家妇产疾病临床医学研究中心，武汉
+² 华中科技大学同济医学院附属同济医院肿瘤侵袭转移教育部重点实验室，武汉
 
 通讯作者：朱涛，zhutao@tjh.tjmu.edu.cn
-邮箱：墨青青 qingqingmo520@tjh.tjmu.edu.cn；陈平波 supercpb520@163.com；徐成 watt15629030676@tjh.tjmu.edu.cn；王亚 misswangya@hotmail.com；胡婷 huting_tj@163.com；孙茜 sunqian@tjh.tjmu.edu.cn
 
 ---
 
 ## 概述
 
-本仓库为论文《Domestic Government Health Expenditure, Out-of-Pocket Spending, and Healthy Life Expectancy in 190 Countries, 2000–2022》（投稿目标期刊：The Lancet Global Health）的完整复现包。所有表格、图形与统计结果均可使用公开数据与本仓库脚本复现。
+本仓库是论文《190 个国家政府卫生支出与健康预期寿命：2000–2023 年组间–组内面板分析》的完整复现包。
+
+研究只问一个窄问题：**在控制一国自身发展水平之后，把更多经济份额投入政府卫生支出，能否换来额外的健康寿命年？** 答案随提问方式而显著不同，而这种差异本身正是本文的主要发现。
 
 ### 主要发现
-- 国内政府卫生支出（GHE）与健康预期寿命（HALE）的**组内关联整体接近零**（双向固定效应 β = −0.12, p = 0.077），与横截面大正关联（+1.47）形成鲜明对比。
-- **低收入组**呈正关联（β = +0.85；cluster bootstrap p = 0.065），对逐一剔除稳健（+0.66至+1.02），集中于MDG时代（+1.27, p = 0.038），SDG时代衰减至零（+0.03, p = 0.928）。
-- GHE与财务保护改善相关：每增加1个百分点GDP的公共筹资，自付医疗支出相对下降约11%（间接效应 a×b = +0.10；bootstrap 95% CI +0.02至+0.23）。
 
-### 研究设计
+**国家之间**，关联大且为正：政府卫生支出每增加 1 个百分点 GDP，对应 1.42 个 HALE 年（95% CI 1.29–1.56）。但这个梯度几乎完全是发展水平的梯度——一旦校正 log 人均 GDP、城市化与生育率，它就塌缩到 −0.04（p = 0.17）。
 
-![图 1. 研究设计、分析框架与关键估计](docs/figure1_latest.png)
+**国家之内**，关联小且**不稳健**：
 
-研究设计、样本构建（4,370 → 4,314 → 4,304国年；189国）与分析框架（主TWFE、事件研究、合成对照、OOP路径分解、低收入组bootstrap稳健性、收入组与时代异质性）。
+| 规格 | β（每 1 个百分点 GDP 对应的 HALE 年） | p |
+|---|---|---|
+| 国家 + 年份固定效应（主规格） | −0.148 | 0.030 |
+| 加国家特定线性趋势 | −0.036 | 0.351 |
+| 限定 2000–2019 年 | −0.087 | 0.198 |
+| 完整案例 vs 多重插补 | −0.148 / −0.074 | 0.030 / 0.086 |
 
----
+四个预设规格中只有一个达到常规显著性。我们报告全部四个，而不是只报告显著的那个。
 
-## 仓库结构
+**负向关联出现的位置，恰好不符合因果解释。** 把 29 个支出骤升事件按"实际人均政府支出是否真正上升"拆分后可以看到：事后下降只出现在支出真正上升的 14 个国家（5 年后 −0.86 个 HALE 年，95% CI −1.36 至 −0.36，前趋势干净），而那些份额上升只因 GDP 下降的事件则毫无效应（全部 p > 0.70）。这是"支出对健康恶化作出反应"的特征，而不是"支出损害健康"。
+
+**低收入国家**是唯一出现正向点估计的组别：每 1 个百分点 GDP 对应 +0.81 个 HALE 年（聚类 p = 0.040，聚类自举 p = 0.065，24 国）。全部 24 个留一法估计方向一致，但精度不足以支持筹资目标。
+
+**财务保护与健康结局的表现不同。** GHE 一致地对应更低的自付支出份额（每 1 个百分点 GDP 对应 13%，95% CI 8–18%），但经自付支出传导的间接通路符号与总关联**相反**（+0.116 对 −0.148）。这是抑制（suppression）模式而非中介机制，无法解释负向估计。
+
+**紧缩事件**在五种估计量下（stacked clean controls、pooled DiD、Sun–Abraham、Callaway–Sant'Anna、插补法）都伴随约 0.7–1.4 个 HALE 年的下降。但各估计量对前趋势的判断取决于所取的前期窗口，因此我们不作因果解读——同时也不能排除真实的事后下降。
+
+### 本研究不主张什么
+
+本研究**不**表明公共卫生支出损害健康。它表明的是：跨国面板无法识别额外公共支出的边际价值；而那些确实出现的负向点估计，与"支出在危机中被动上升"的模式一致。
+
+## 仓库内容
 
 ```
-ghe-oop-hale-panel/
-├── code/                          # 30个分析脚本（R 4.5.0为主；Python 3.9+工具）
-│   ├── 01_main_analysis.R         # 主TWFE分析
-│   ├── 03_event_study.R           # GHE激增事件研究（参考期 k = −5）
-│   ├── 04_mediation_oop.R         # OOP路径分解
-│   ├── 10_wild_bootstrap_E5.R     # 低收入组wild cluster bootstrap
-│   ├── A2_synthetic_control_reforms.R  # SCM案例研究
-│   ├── archive/                   # 一次性开发脚本（不属于正式管线）
-│   └── ...                        # 完整管线：01–15、A1–A3、B1–B4、C1–C4
-├── results/
-│   ├── tables/                    # 全部分析表（CSV）
-│   ├── figures/                   # 出版图（PDF，Wong色盲友好调色板）
-│   └── panel/                     # 模型对象与处理后面板（RDS）
-├── submission/                    # STROBE/GATHER清单、文献筛选台账
-└── data/                          # 数据字典与处理说明
+code/               分析脚本（按论文出现顺序）
+data/processed/     整合面板（2000-2023）+ 变量字典
+data/raw/           数据来源、版本记录、面板期设定依据
+results/tables/     论文与补充材料中每一个数字对应的 CSV
+results/figures/    14 幅入稿图（PDF + PNG）
+submission/         文献筛选台账与 PRISMA 输入
+docs/               补充文档
 ```
 
-## 复现说明
+### 数据来源
+| 组成 | 来源 | 版本 |
+|---|---|---|
+| 出生时健康预期寿命（HALE） | GBD 2023 Results Tool（IHME） | 1990–2023 回溯估计 |
+| GHE、自付支出、人均 GDP、城市化、生育率、人口 | World Bank WDI | 2026-10-08 版 |
+| 治理综合指数 | Worldwide Governance Indicators | 2025 修订版 |
+| 收入分组 | World Bank FY2026 分类 | — |
+| 文献检索 | PubMed E-utilities + OpenAlex | 2026-08-14 |
 
-- **环境**：R 4.5.0（fixest 0.13.1、data.table 1.16.4、tidysynth 0.2.0、mice 3.17.3、ggplot2 3.5.1、fwildclusterboot 0.13.0）、Python 3.9+
-- **随机种子**：所有随机过程 seed = 49
-- **数据来源**（均为公开数据）：GBD 2023 Results Tool（HALE）、World Bank WDI API（GHE/GDP/OOP/协变量）、WGI 2025（治理）、IMF GFS（税收）
-- **管线顺序**：01 → 02 → … → 15，随后 A1–C4 补充脚本
-- 图为单panel PDF（`results/figures/`）；表为CSV（`results/tables/`）。
-- 全部图的PNG预览版在 `results/figures/png/`（GitHub 界面可直接在线查看）。
+WDI 2026 年 10 月 8 日版同时把 GHE 覆盖延伸到 2023 年（面板内 191 个国家全部可得），并**修订了历史值**（707 个可比观测中 430 个发生变动，最大 4.95 个百分点）。因此面板是**全量重建**而非简单延长——详见 `data/raw/PANEL_PERIOD_AND_DATA_VERSIONS.md`。
+
+### 复现
+在仓库根目录运行脚本。分析使用 R 4.x 与 `fixest`、`data.table`、`mice`、`did`、`tidysynth`；绘图使用 R 与 Python（matplotlib）。
+
+发布前，补充材料中的每一个表格数值格都与对应源 CSV 做了机器核对：**396 个数值格，0 处不符，且已校验正负号**。
+
+## 伦理
+
+本研究仅使用公开可得的国家层面汇总数据，不含个体层面或可识别信息，无需伦理审批。
 
 ## 许可
 
-MIT License（见LICENSE）。数据来自公开来源（GBD、World Bank、WGI、IMF），受各自条款约束。
+代码：MIT。数据衍生品：CC BY 4.0（与源数据库条款一致）。
+
+## 引用
+
+Mo Q, Chen P, Xu C, Wang Y, Hu T, Sun Q, Zhu T. Government health expenditure and healthy life expectancy in 190 countries, 2000-2023: a within-between panel analysis. Replication package, Zenodo. https://doi.org/10.5281/zenodo.22028176
