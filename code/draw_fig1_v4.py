@@ -9,7 +9,7 @@ matplotlib.rcParams["pdf.fonttype"] = 42
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, FancyArrowPatch
 
-MM_W, MM_H = 180.0, 115.0
+MM_W, MM_H = 168.0, 107.3   # match journal text width (A4 - 2x2cm)
 GREY_D = "#4D4D4D"
 FILL_A = "#F0C4C2"; FILL_B = "#C2D9EE"; FILL_C = "#E6C4CC"
 FILL_D = "#BBD9EA"; FILL_K = "#F0E8D8"
